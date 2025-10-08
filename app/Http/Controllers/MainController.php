@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Boot;
+
 class MainController
 {
     public function index() {
+        if (is_dir(base_path("node_modules"))) {
+            Boot::dependencias();
+        }
+
         return view("index");
     }
 
