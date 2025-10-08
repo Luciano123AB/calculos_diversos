@@ -6,11 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Projeto: Calculos Diversos</title>
     @include("layouts.partials.links")
+
+    @include("layouts.partials.estilos")
 </head>
 <body class="bg-primary text-center fst-italic">
     @yield("content")
 
-    <footer class="mt-5">
+    <footer class="mt-5 mb-2">
         <img src="{{ asset("assets/images/foto_proprietario.png") }}" style="width: 35px; height: 35px;" class="border border-black shadow"> 
         
         Todos os Direitos Reservados: Luciano Eduardo Stefanello da Silva - 2025
