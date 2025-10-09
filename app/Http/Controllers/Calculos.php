@@ -23,7 +23,7 @@ class Calculos
         $quantidade = intval($request->input("quantidade"));
         $total = $valor * $quantidade;
 
-        session(["resultado" => $total]);
+        session(["resultado" => number_format($total, 2, ",", ".")]);
 
         return redirect()->back();
     }
@@ -45,7 +45,7 @@ class Calculos
         $desconto = intval($request->input("desconto"));
         $total = $valor - ($valor * $desconto / 100);
 
-        session(["resultado" => $total]);
+        session(["resultado" => number_format($total, 2, ",", ".")]);
 
         return redirect()->back();
     }
@@ -67,7 +67,7 @@ class Calculos
         $distancia = intval($request->input("distancia"));
         $total = $valor_km * $distancia;
 
-        session(["resultado" => $total]);
+        session(["resultado" => number_format($total, 2, ",", ".")]);
 
         return redirect()->back();
     }
@@ -90,8 +90,8 @@ class Calculos
         $imposto = $valor * ($taxa / 100);
         $valor_final = $valor * $imposto;
 
-        session(["imposto" => $imposto]);
-        session(["resultado" => $valor_final]);
+        session(["imposto" => number_format($imposto, 2, ",", ".")]);
+        session(["resultado" => number_format($valor_final, 2, ",", ".")]);
 
         return redirect()->back();
     }
