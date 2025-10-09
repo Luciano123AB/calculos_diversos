@@ -27,7 +27,7 @@ class MainController
     }
 
     public function impostos() {
-        echo "Impostos";
+        return view("impostos");
     }
 
     public function parcelamentoJuros() {

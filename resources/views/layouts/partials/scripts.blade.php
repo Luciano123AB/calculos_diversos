@@ -13,4 +13,14 @@
         document.getElementById("valor_km").value = "";
         document.getElementById("distancia").value = "";
     }
+
+    function limparCampos04() {
+        document.getElementById("valor_km").value = "";
+        document.getElementById("distancia").value = "";
+    }
+
+    function limparCampos05() {
+        document.getElementById("valor").value = "";
+        document.getElementById("taxa").value = "";
+    }
 </script>

@@ -71,4 +71,28 @@ class Calculos
 
         return redirect()->back();
     }
+
+    public function calcularImpostos(Request $request) {
+        $request->validate(
+            [
+                "valor" => "required",
+                "taxa" => "required"
+            ],
+
+            [
+                "valor.required" => "Insira o valor.",
+                "taxa.required" => "Insira a taxa de imposto."
+            ]
+        );
+        
+        $valor = floatval($request->input("valor"));
+        $taxa = intval($request->input("taxa"));
+        $imposto = $valor * ($taxa / 100);
+        $valor_final = $valor * $imposto;
+
+        session(["imposto" => $imposto]);
+        session(["resultado" => $valor_final]);
+
+        return redirect()->back();
+    }
 }

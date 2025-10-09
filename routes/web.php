@@ -20,6 +20,8 @@ Route::post("/calcular_frete", [Calculos::class, "calcularFrete"])->name("Calcul
 
 Route::get("/impostos", [MainController::class, "impostos"])->name("Impostos");
 
+Route::post("/calcular_impostos", [Calculos::class, "calcularImpostos"])->name("CalcularImpostos");
+
 Route::get("/parcelamento_juros", [MainController::class, "parcelamentoJuros"])->name("ParcelamentoJuros");
 
 Route::get("/conversao_moeda", [MainController::class, "conversaoMoeda"])->name("ConversaoMoeda");
