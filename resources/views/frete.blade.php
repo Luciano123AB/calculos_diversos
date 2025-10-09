@@ -24,13 +24,13 @@
                     @csrf
 
                     <div class="input-group input-group-lg mb-3">
-                        <span class="input-group-text"><i class="bi bi-cash-coin me-2"></i> Valor(Km)</span>
+                        <span class="input-group-text"><i class="bi bi-cash-coin me-1"></i>Valor(Km)</span>
 
                         <input type="number" step="0.01" id="valor_km" name="valor_km" class="form-control text-end" placeholder="00,00" aria-label="ValorKm">
 
                         <span class="input-group-text bg-white border-0 fw-bold px-3">×</span>
 
-                        <input type="number" id="distancia" name="distancia" class="form-control text-end" placeholder="0000" aria-label="Distancia">
+                        <input type="number" id="distancia" name="distancia" class="form-control text-end" placeholder="0000.0" aria-label="Distancia">
 
                         <span class="input-group-text"><i class="bi bi-truck me-1"></i>Distância</span>
                     </div>
@@ -86,6 +86,7 @@
     <script>
         $(document).ready(function() {
             $("#valor_km").mask("00.00");
+            $("#distancia").mask("0000.0");
         });
     </script>
 @endsection
