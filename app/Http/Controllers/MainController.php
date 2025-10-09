@@ -31,7 +31,7 @@ class MainController
     }
 
     public function parcelamentoJuros() {
-        echo "Parcelamento Juros";
+        return view("parcelamento_juros");
     }
 
     public function conversaoMoeda() {

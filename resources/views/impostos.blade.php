@@ -24,7 +24,7 @@
                     @csrf
 
                     <div class="input-group input-group-lg mb-3">
-                        <span class="input-group-text"><i class="bi bi-cash-coin me-2"></i> Valor</span>
+                        <span class="input-group-text"><i class="bi bi-cash-coin me-1"></i>Valor</span>
 
                         <input type="number" step="0.01" id="valor" name="valor" class="form-control text-end" placeholder="0000,00" aria-label="Valor">
 

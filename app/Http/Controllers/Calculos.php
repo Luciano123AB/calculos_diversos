@@ -23,7 +23,7 @@ class Calculos
         $quantidade = intval($request->input("quantidade"));
         $total = $valor * $quantidade;
 
-        session(["resultado" => $total]);
+        session(["resultado" => number_format($total, 2, ",", ".")]);
 
         return redirect()->back();
     }
@@ -45,7 +45,7 @@ class Calculos
         $desconto = intval($request->input("desconto"));
         $total = $valor - ($valor * $desconto / 100);
 
-        session(["resultado" => $total]);
+        session(["resultado" => number_format($total, 2, ",", ".")]);
 
         return redirect()->back();
     }
@@ -67,7 +67,7 @@ class Calculos
         $distancia = intval($request->input("distancia"));
         $total = $valor_km * $distancia;
 
-        session(["resultado" => $total]);
+        session(["resultado" => number_format($total, 2, ",", ".")]);
 
         return redirect()->back();
     }
@@ -90,8 +90,42 @@ class Calculos
         $imposto = $valor * ($taxa / 100);
         $valor_final = $valor * $imposto;
 
-        session(["imposto" => $imposto]);
-        session(["resultado" => $valor_final]);
+        session(["imposto" => number_format($imposto, 2, ",", ".")]);
+        session(["resultado" => number_format($valor_final, 2, ",", ".")]);
+
+        return redirect()->back();
+    }
+
+    public function calcularParcelamentoJuros(Request $request) {
+        $request->validate(
+            [
+                "valor" => "required",
+                "taxa" => "required",
+                "numero_meses" => "required"
+            ],
+
+            [
+                "valor.required" => "Insira o valor.",
+                "taxa.required" => "Insira a taxa de juros.",
+                "numero_meses.required" => "Insira o número de meses."
+            ]
+        );
+        
+        $valor = floatval($request->input("valor"));
+        $taxa = floatval($request->input("taxa") / 100);
+        $numero_meses = intval($request->input("numero_meses"));
+
+        if ($taxa == 0) {
+
+            $parcela = $valor / $numero_meses;
+
+        } else {
+
+            $parcela = $valor * (($taxa) * pow(1 + $taxa, $numero_meses)) / (pow(1 + $taxa, $numero_meses) - 1);
+            
+        }
+
+        session(["resultado" => number_format($parcela, 2, ",", ".")]);
 
         return redirect()->back();
     }

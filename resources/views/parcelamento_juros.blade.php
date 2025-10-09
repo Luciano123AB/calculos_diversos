@@ -8,9 +8,9 @@
             <span class="d-none d-sm-inline fw-semibold">Voltar</span>
         </a>
 
-        <h2 class="text-light mb-2 fw-light">Descontos e</h2>
+        <h2 class="text-light mb-2 fw-light">Parcelamento e</h2>
 
-        <span class="text-white fw-bold display-5">Cupons</span>
+        <span class="text-white fw-bold display-5">Juros</span>
     </nav>
 
     <div class="container my-5">
@@ -18,23 +18,29 @@
             <div class="card-header bg-info text-white text-center py-4">
                 <h3 class="fw-bold mb-1">Cálculo</h3>
 
-                <h5 class="fw-light mb-0">Insira os valores abaixo para obter o desconto</h5>
+                <h5 class="fw-light mb-0">Insira os valores abaixo para obter a parcela</h5>
             </div>
 
             <div class="card-body bg-light p-5">
-                <form action="{{ route("CalcularDescontosCupons") }}" method="POST" novalidate class="mx-auto" style="max-width: 600px;">
+                <form action="{{ route("CalcularParcelamentoJuros") }}" method="POST" novalidate class="mx-auto" style="max-width: 900px;">
                     @csrf
 
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text"><i class="bi bi-cash-coin me-1"></i>Valor</span>
 
-                        <input type="number" step="0.01" id="valor" name="valor" class="form-control text-end" placeholder="000,00" aria-label="Valor">
+                        <input type="number" step="0.01" id="valor" name="valor" class="form-control text-end" placeholder="000.000,00" aria-label="Valor">
 
-                        <span class="input-group-text bg-white border-0 fw-bold px-3">-</span>
+                        <span class="input-group-text bg-white border-0 fw-bold px-3">×</span>
 
-                        <input type="number" id="desconto" name="desconto" class="form-control text-end" placeholder="0" aria-label="Desconto">
+                        <input type="number" id="taxa" name="taxa" class="form-control text-end" placeholder="0,0" aria-label="Taxa">
 
-                        <span class="input-group-text"><i class="bi bi-percent me-1"></i>Desconto</span>
+                        <span class="input-group-text"><i class="bi bi-coin me-1"></i>Taxa</span>
+
+                        <span class="input-group-text bg-white border-0 border-start fw-bold px-3">÷</span>
+
+                        <input type="number" id="numero_meses" name="numero_meses" class="form-control text-end" placeholder="0" aria-label="NumeroMeses">
+
+                        <span class="input-group-text"><i class="bi bi-calendar2-date me-1"></i>Nº Meses</span>
                     </div>
 
                     <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
@@ -47,7 +53,15 @@
                         </div>
 
                         <div class="flex-fill">
-                            @error("desconto")
+                            @error("taxa")
+                                <div class="alert alert-danger py-2 mb-0" role="alert">
+                                    <i class="bi bi-exclamation-circle-fill me-1"></i> {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+                        <div class="flex-fill">
+                            @error("numero_meses")
                                 <div class="alert alert-danger py-2 mb-0" role="alert">
                                     <i class="bi bi-exclamation-circle-fill me-1"></i> {{ $message }}
                                 </div>
@@ -72,7 +86,7 @@
                             <i class="bi bi-calculator-fill me-2"></i> Calcular
                         </button>
 
-                        <button type="button" id="limpar" class="btn btn-outline-secondary fw-semibold px-4" onclick="limparCampos02()">
+                        <button type="button" id="limpar" class="btn btn-outline-secondary fw-semibold px-4" onclick="limparCampos06()">
                             <i class="bi bi-x-circle me-2"></i> Limpar
                         </button>
                     </div>
@@ -87,7 +101,8 @@
 
     <script>
         $(document).ready(function() {
-            $("#valor").mask("000.00");
+            $("#valor").mask("000000.00");
+            $("#taxa").mask("0.0");
         });
     </script>
 @endsection

@@ -23,4 +23,10 @@
         document.getElementById("valor").value = "";
         document.getElementById("taxa").value = "";
     }
+
+    function limparCampos06() {
+        document.getElementById("valor").value = "";
+        document.getElementById("taxa").value = "";
+        document.getElementById("numero_meses").value = "";
+    }
 </script>
