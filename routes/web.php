@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\Calculos;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
 Route::get("/", [MainController::class, "index"])->name("index");
 
 Route::get("/subtotal_total_compras", [MainController::class, "subtotalTotalCompras"])->name("SubtotalTotalCompras");
+
+Route::post("/calcular_subtotal_total_compras", [Calculos::class, "calcularSubtotalTotalCompras"])->name("CalcularSubtotalTotalCompras");
 
 Route::get("/descontos_cupons", [MainController::class, "descontosCupons"])->name("DescontosCupons");
 

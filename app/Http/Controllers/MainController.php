@@ -15,7 +15,7 @@ class MainController
     }
 
     public function subtotalTotalCompras() {
-        echo "Subtotal Total Compras";
+        return view("subtotal_total_compras");
     }
 
     public function descontosCupons() {
