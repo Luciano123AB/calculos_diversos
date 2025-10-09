@@ -16,6 +16,8 @@ Route::post("/calcular_descontos_cupons", [Calculos::class, "calcularDescontosCu
 
 Route::get("/frete", [MainController::class, "frete"])->name("Frete");
 
+Route::post("/calcular_frete", [Calculos::class, "calcularFrete"])->name("CalcularFrete");
+
 Route::get("/impostos", [MainController::class, "impostos"])->name("Impostos");
 
 Route::get("/parcelamento_juros", [MainController::class, "parcelamentoJuros"])->name("ParcelamentoJuros");
