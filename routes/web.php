@@ -12,6 +12,8 @@ Route::post("/calcular_subtotal_total_compras", [Calculos::class, "calcularSubto
 
 Route::get("/descontos_cupons", [MainController::class, "descontosCupons"])->name("DescontosCupons");
 
+Route::post("/calcular_descontos_cupons", [Calculos::class, "calcularDescontosCupons"])->name("CalcularDescontosCupons");
+
 Route::get("/frete", [MainController::class, "frete"])->name("Frete");
 
 Route::get("/impostos", [MainController::class, "impostos"])->name("Impostos");

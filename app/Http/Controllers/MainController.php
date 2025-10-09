@@ -19,7 +19,7 @@ class MainController
     }
 
     public function descontosCupons() {
-        echo "Descontos Cupons";
+        return view("descontos_cupons");
     }
 
     public function frete() {
