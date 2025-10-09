@@ -17,5 +17,7 @@
         
         Todos os Direitos Reservados: Luciano Eduardo Stefanello da Silva - 2025
     </footer>
+
+    @include("layouts.partials.scripts")
 </body>
 </html>

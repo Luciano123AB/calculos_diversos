@@ -4,7 +4,7 @@ use App\Http\Controllers\Calculos;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
-Route::get("/", [MainController::class, "index"])->name("index");
+Route::get("/", [MainController::class, "index"])->name("Index");
 
 Route::get("/subtotal_total_compras", [MainController::class, "subtotalTotalCompras"])->name("SubtotalTotalCompras");
 
