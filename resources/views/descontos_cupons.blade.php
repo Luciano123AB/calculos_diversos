@@ -28,13 +28,21 @@
                     <div class="input-group input-group-lg mb-3">
                         <span class="input-group-text"><i class="bi bi-cash-coin me-1"></i>Valor</span>
 
-                        <input type="number" step="0.01" id="valor" name="valor" class="form-control text-end" placeholder="0.000,00" aria-label="Valor">
+                        <input type="number" step="0.01" id="valor" name="valor" class="form-control text-end" placeholder="0.000,00" aria-label="Valor" value="{{ old("valor") }}">
 
                         <span class="input-group-text bg-white border-0 fw-bold px-3">-</span>
 
-                        <input type="number" id="desconto" name="desconto" class="form-control text-end" placeholder="0" aria-label="Desconto">
+                        <input type="number" id="desconto" name="desconto" class="form-control text-end" placeholder="000.0" aria-label="Desconto" min="0" max="100" step="0.1" value="{{ old("desconto") }}">
 
                         <span class="input-group-text"><i class="bi bi-percent me-1"></i>Desconto</span>
+
+                        <div class="input-group-text">
+                            <input type="checkbox" class="form-check-input me-1" id="fixo">
+                            
+                            <label class="form-check-label" for="checkFixo">
+                                Fixo
+                            </label>
+                        </div>
                     </div>
 
                     <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
@@ -86,8 +94,28 @@
     </div>
 
     <script>
-        $(document).ready(function() {
-            $("#valor").mask("0000.00");
+    $(document).ready(function() {
+        $("#valor").mask("0000.00");
+
+        const fixo = $("#fixo");
+        const desconto = $("#desconto");
+
+        aplicarMascara();
+
+        fixo.change(function() {
+            aplicarMascara();
         });
-    </script>
+
+        function aplicarMascara() {
+            desconto.unmask();
+
+            if (fixo.is(":checked")) {
+                desconto.mask("000");
+            } else {
+                desconto.mask("000.0");
+            }
+        }        
+    });
+</script>
+
 @endsection

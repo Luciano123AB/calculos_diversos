@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\DescontosCupons;
+use App\Services\Frete;
+use App\Services\Impostos;
+use App\Services\ParcelamentoJuros;
+use App\Services\SubtotalTotalCompras;
 use Illuminate\Http\Request;
 
 class Calculos
@@ -19,11 +24,10 @@ class Calculos
             ]
         );
         
-        $valor = floatval($request->input("valor"));
-        $quantidade = intval($request->input("quantidade"));
-        $total = $valor * $quantidade;
-
-        session(["resultado" => number_format($total, 2, ",", ".")]);
+        $valor = $request->input("valor");
+        $quantidade = $request->input("quantidade");
+        
+        session(["resultado" => number_format(SubtotalTotalCompras::calcular($valor, $quantidade), 2, ",", ".")]);
 
         return redirect()->back();
     }
@@ -41,11 +45,10 @@ class Calculos
             ]
         );
         
-        $valor = floatval($request->input("valor"));
-        $desconto = intval($request->input("desconto"));
-        $total = $valor - ($valor * $desconto / 100);
+        $valor = $request->input("valor");
+        $desconto = $request->input("desconto");
 
-        session(["resultado" => number_format($total, 2, ",", ".")]);
+        session(["resultado" => number_format(DescontosCupons::calcular($valor, $desconto), 2, ",", ".")]);
 
         return redirect()->back();
     }
@@ -63,11 +66,10 @@ class Calculos
             ]
         );
         
-        $valor_km = floatval($request->input("valor_km"));
-        $distancia = intval($request->input("distancia"));
-        $total = $valor_km * $distancia;
+        $valor_km = $request->input("valor_km");
+        $distancia = $request->input("distancia");
 
-        session(["resultado" => number_format($total, 2, ",", ".")]);
+        session(["resultado" => number_format(Frete::calcular($valor_km, $distancia), 2, ",", ".")]);
 
         return redirect()->back();
     }
@@ -85,13 +87,11 @@ class Calculos
             ]
         );
         
-        $valor = floatval($request->input("valor"));
-        $taxa = intval($request->input("taxa"));
-        $imposto = $valor * ($taxa / 100);
-        $valor_final = $valor * $imposto;
+        $valor = $request->input("valor");
+        $taxa = $request->input("taxa");
 
-        session(["imposto" => number_format($imposto, 2, ",", ".")]);
-        session(["resultado" => number_format($valor_final, 2, ",", ".")]);
+        session(["imposto" => number_format(Impostos::calcularImposto($valor, $taxa), 2, ",", ".")]);
+        session(["resultado" => number_format(Impostos::calcular($valor, $taxa), 2, ",", ".")]);
 
         return redirect()->back();
     }
@@ -100,32 +100,24 @@ class Calculos
         $request->validate(
             [
                 "valor" => "required",
-                "taxa" => "required",
                 "numero_meses" => "required"
             ],
 
             [
                 "valor.required" => "Insira o valor.",
-                "taxa.required" => "Insira a taxa de juros.",
                 "numero_meses.required" => "Insira o número de meses."
             ]
         );
         
-        $valor = floatval($request->input("valor"));
-        $taxa = floatval($request->input("taxa") / 100);
-        $numero_meses = intval($request->input("numero_meses"));
+        $valor = $request->input("valor");
+        $taxa = $request->input("taxa", 0.0);
+        $numero_meses = $request->input("numero_meses");
 
-        if ($taxa == 0) {
-
-            $parcela = $valor / $numero_meses;
-
-        } else {
-
-            $parcela = $valor * (($taxa) * pow(1 + $taxa, $numero_meses)) / (pow(1 + $taxa, $numero_meses) - 1);
-            
+        if ($taxa == "") {
+            return redirect()->back()->withInput()->with("taxa", "Insira a taxa.");
         }
 
-        session(["resultado" => number_format($parcela, 2, ",", ".")]);
+        session(["resultado" => number_format(ParcelamentoJuros::calcular($valor, $taxa, $numero_meses), 2, ",", ".")]);
 
         return redirect()->back();
     }
