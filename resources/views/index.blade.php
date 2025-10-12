@@ -26,9 +26,9 @@
                                 
                                 <a href="{{ route('DescontosCupons') }}" class="btn btn-outline-info fw-semibold">Descontos e Cupons</a>
                                 
-                                <a href="{{ route('Frete') }}" class="btn btn-outline-info fw-semibold">Frete</a>
+                                <a href="{{ route('Frete') }}" class="btn btn-outline-info fw-semibold">Descobrir Frete</a>
                                 
-                                <a href="{{ route('Impostos') }}" class="btn btn-outline-info fw-semibold">Impostos (ICMS | ISS | IVA)</a>
+                                <a href="{{ route('Impostos') }}" class="btn btn-outline-info fw-semibold">Calcular Impostos (ICMS | ISS | IVA)</a>
                                 
                                 <a href="{{ route('ParcelamentoJuros') }}" class="btn btn-outline-info fw-semibold">Parcelamento e Juros</a>
                             </div>

@@ -7,7 +7,7 @@ use App\Services\Boot;
 class MainController
 {
     public function index() {
-        if (is_dir(base_path("node_modules"))) {
+        if (!is_dir(base_path("node_modules"))) {
             Boot::dependencias();
         }
 
@@ -15,23 +15,53 @@ class MainController
     }
 
     public function subtotalTotalCompras() {
-        return view("subtotal_total_compras");
+        return view("subtotal_total_compras")->with("textos",
+            [
+                "h2" => "Subtotal e Total",
+                "span" => "de Compras",
+                "h5" => "o total"
+            ]
+        );
     }
 
     public function descontosCupons() {
-        return view("descontos_cupons");
+        return view("descontos_cupons")->with("textos",
+            [
+                "h2" => "Descontos e",
+                "span" => "Cupons",
+                "h5" => "o desconto"
+            ]
+        );
     }
 
     public function frete() {
-        return view("frete");
+        return view("frete")->with("textos",
+            [
+                "h2" => "Descobrir",
+                "span" => "Frete",
+                "h5" => "o frete"
+            ]
+        );
     }
 
     public function impostos() {
-        return view("impostos");
+        return view("impostos")->with("textos",
+            [
+                "h2" => "Calcular",
+                "span" => "Impostos",
+                "h5" => "o imposto"
+            ]
+        );
     }
 
     public function parcelamentoJuros() {
-        return view("parcelamento_juros");
+        return view("parcelamento_juros")->with("textos",
+            [
+                "h2" => "Parcelamento e",
+                "span" => "Juros",
+                "h5" => "a parcela"
+            ]
+        );
     }
 
     public function conversaoMoeda() {
