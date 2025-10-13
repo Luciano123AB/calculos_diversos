@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\ConversaoMoeda;
 use App\Services\DescontosCupons;
 use App\Services\Frete;
 use App\Services\Impostos;
@@ -118,6 +119,48 @@ class Calculos
         }
 
         session(["resultado" => number_format(ParcelamentoJuros::calcular($valor, $taxa, $numero_meses), 2, ",", ".")]);
+
+        return redirect()->back();
+    }
+
+    public function calcularConversaoMoeda(Request $request) {
+        $request->validate(
+            [
+                "valor" => "required",
+                "moeda" => "required"
+            ],
+
+            [
+                "valor.required" => "Insira o valor dos produtos.",
+                "moeda.required" => "Selecione a moeda."
+            ]
+        );
+        
+        $valor = $request->input("valor");
+        $moeda = $request->input("moeda");
+        $simbolo = "";
+
+        if ($moeda == "Dólar") {
+            $simbolo = "$";
+        }
+
+        if ($moeda == "Euro") {
+            $simbolo = "€";
+        }
+
+        if ($moeda == "Libra") {
+            $simbolo = "£";
+        }
+
+        if ($moeda == "Iene") {
+            $simbolo = "¥";
+        }
+
+        if ($moeda == "Fraco") {
+            $simbolo = "Fr";
+        }
+        
+        session(["resultado" => "$simbolo " . number_format(ConversaoMoeda::calcular($valor, $moeda), 2, ",", ".")]);
 
         return redirect()->back();
     }

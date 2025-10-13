@@ -28,6 +28,8 @@ Route::post("/calcular_parcelamento_juros", [Calculos::class, "calcularParcelame
 
 Route::get("/conversao_moeda", [MainController::class, "conversaoMoeda"])->name("ConversaoMoeda");
 
+Route::post("/calcular_conversao_moeda", [Calculos::class, "calcularConversaoMoeda"])->name("CalcularConversaoMoeda");
+
 Route::get("/juros_compostos_simples", [MainController::class, "jurosCompostosSimples"])->name("JurosCompostosSimples");
 
 Route::get("/taxas_percentuais", [MainController::class, "taxasPercentuais"])->name("TaxasPercentuais");

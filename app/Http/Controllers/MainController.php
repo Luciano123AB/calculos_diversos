@@ -65,7 +65,13 @@ class MainController
     }
 
     public function conversaoMoeda() {
-        echo "Conversao Moeda";
+        return view("conversao_moeda")->with("textos",
+            [
+                "h2" => "Conversão de",
+                "span" => "Moeda",
+                "h5" => "valor"
+            ]
+        );
     }
 
     public function jurosCompostosSimples() {
