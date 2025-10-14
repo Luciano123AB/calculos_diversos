@@ -126,18 +126,21 @@ class Calculos
     public function calcularConversaoMoeda(Request $request) {
         $request->validate(
             [
-                "valor" => "required",
-                "moeda" => "required"
+                "valor" => "required"
             ],
 
             [
-                "valor.required" => "Insira o valor dos produtos.",
-                "moeda.required" => "Selecione a moeda."
+                "valor.required" => "Insira o valor dos produtos."
             ]
         );
         
         $valor = $request->input("valor");
         $moeda = $request->input("moeda");
+
+        if ($moeda == "Selecione a moeda") {
+            return redirect()->back()->withInput()->with("moeda", "Selecione a moeda.");
+        }
+
         $simbolo = "";
 
         if ($moeda == "Dólar") {

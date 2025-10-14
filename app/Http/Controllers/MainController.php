@@ -69,7 +69,7 @@ class MainController
             [
                 "h2" => "Conversão de",
                 "span" => "Moeda",
-                "h5" => "valor"
+                "h5" => "o valor"
             ]
         );
     }

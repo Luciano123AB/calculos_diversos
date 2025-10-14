@@ -35,11 +35,11 @@
             </div>
             
             <div class="flex-fill">
-                @error("quantidade")
+                @if(session("moeda"))
                     <div class="alert alert-danger py-2 mb-0" role="alert">
-                        <i class="bi bi-exclamation-circle-fill me-1"></i> {{ $message }}
+                        <i class="bi bi-exclamation-circle-fill me-1"></i> {{ session("moeda") }}
                     </div>
-                @enderror
+                @endif
             </div>
         </div>
         
@@ -70,7 +70,7 @@
 
     <script>
         $(document).ready(function() {
-            $("#valor").mask("000000.00");
+            $("#valor").mask("##0.00", { reverse: true });
         });
     </script>
 @endsection
