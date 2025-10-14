@@ -88,7 +88,7 @@
                 if (fixo.is(":checked")) {
                     desconto.mask("000");
                 } else {
-                    desconto.mask("000.0");
+                    desconto.mask("##0.0", { reverse: true });
                 }
             }        
         });

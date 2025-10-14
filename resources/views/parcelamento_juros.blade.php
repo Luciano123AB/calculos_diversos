@@ -86,7 +86,7 @@
     <script>
         $(document).ready(function() {
             $("#valor").mask("##0.00", { reverse: true });
-            $("#taxa").mask("00.0");
+            $("#taxa").mask("##0.0", { reverse: true });
             $("#numero_meses").mask("00");
 
             const sem_juros = $("#sem_juros");
