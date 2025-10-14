@@ -6,6 +6,7 @@ use App\Services\ConversaoMoeda;
 use App\Services\DescontosCupons;
 use App\Services\Frete;
 use App\Services\Impostos;
+use App\Services\JurosCompostosSimples;
 use App\Services\ParcelamentoJuros;
 use App\Services\SubtotalTotalCompras;
 use Illuminate\Http\Request;
@@ -126,18 +127,21 @@ class Calculos
     public function calcularConversaoMoeda(Request $request) {
         $request->validate(
             [
-                "valor" => "required",
-                "moeda" => "required"
+                "valor" => "required"
             ],
 
             [
-                "valor.required" => "Insira o valor dos produtos.",
-                "moeda.required" => "Selecione a moeda."
+                "valor.required" => "Insira o valor dos produtos."
             ]
         );
         
         $valor = $request->input("valor");
         $moeda = $request->input("moeda");
+
+        if ($moeda == "Selecione a moeda") {
+            return redirect()->back()->withInput()->with("moeda", "Selecione a moeda.");
+        }
+
         $simbolo = "";
 
         if ($moeda == "Dólar") {
@@ -161,6 +165,37 @@ class Calculos
         }
         
         session(["resultado" => "$simbolo " . number_format(ConversaoMoeda::calcular($valor, $moeda), 2, ",", ".")]);
+
+        return redirect()->back();
+    }
+
+    public function calcularJurosCompostosSimples(Request $request) {
+        $request->validate(
+            [
+                "valor" => "required",
+                "juros" => "required",
+                "taxa" => "required",
+                "tempo" => "required"
+            ],
+
+            [
+                "valor.required" => "Insira o valor dos produtos.",
+                "juros.required" => "Selecione o tipo de juros.",
+                "taxa.required" => "Insira a taxa.",
+                "tempo.required" => "Insira o tempo."
+            ]
+        );
+        
+        $valor = $request->input("valor");
+        $juros = $request->input("juros");
+        $taxa = $request->input("taxa");
+        $tempo = $request->input("tempo");
+
+        if ($juros == "Selecione o juros") {
+            return redirect()->back()->withInput()->with("juros", "Selecione o tipo de juros.");
+        }
+        
+        session(["resultado" => number_format(JurosCompostosSimples::calcular($valor, $juros, $taxa, $tempo), 2, ",", ".")]);
 
         return redirect()->back();
     }

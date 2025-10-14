@@ -69,13 +69,19 @@ class MainController
             [
                 "h2" => "Conversão de",
                 "span" => "Moeda",
-                "h5" => "valor"
+                "h5" => "o valor"
             ]
         );
     }
 
     public function jurosCompostosSimples() {
-        echo "Juros Compostos Simples";
+        return view("juros_compostos_simples")->with("textos",
+            [
+                "h2" => "Juros",
+                "span" => "Compostos e Simples",
+                "h5" => "o total"
+            ]
+        );
     }
 
     public function taxasPercentuais() {

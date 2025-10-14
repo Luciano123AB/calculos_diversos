@@ -63,7 +63,7 @@
 
     <script>
         $(document).ready(function() {
-            $("#valor").mask("000.00");
+            $("#valor").mask("##0.00", { reverse: true });
         });
     </script>
 @endsection

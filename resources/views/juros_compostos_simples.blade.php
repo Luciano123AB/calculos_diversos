@@ -2,8 +2,8 @@
 
 @section("content")
     @include("layouts.top")
-
-    <form action="{{ route("CalcularParcelamentoJuros") }}" method="POST" novalidate class="mx-auto" style="max-width: 900px;">
+                
+    <form action="{{ route("CalcularJurosCompostosSimples") }}" method="POST" novalidate class="mx-auto" style="max-width: 600px;">
         @csrf
         
         <div class="input-group input-group-lg mb-3">
@@ -13,28 +13,46 @@
             
             <span class="input-group-text bg-white border-0 fw-bold px-3">×</span>
             
-            <input type="number" id="taxa" name="taxa" class="form-control text-end" placeholder="0,0" aria-label="Taxa" value="{{ old("taxa") }}">
-            
-            <span class="input-group-text"><i class="bi bi-coin me-1"></i>Taxa</span>
-            
-            <div class="input-group-text">
-                <input type="checkbox" class="form-check-input me-1" id="sem_juros">
-                
-                <label class="form-check-label" for="checkSemJuros">
-                    S/Juros
-                </label>
+            <select id="juros" name="juros" class="form-select" aria-label="Juros">
+                <option selected>Selecione o juros</option>
+                <option value="Composto" {{ old("juros") == "Composto" ? "selected" : "" }}>Composto</option>
+                <option value="Simples" {{ old("juros") == "Simples" ? "selected" : "" }}>Simples</option>
+            </select>
+
+            <span class="input-group-text"><i class="bi bi-percent me-1"></i>Juros</span>
+        </div>
+
+        <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
+            <div class="flex-fill">
+                @error("valor")
+                    <div class="alert alert-danger py-2 mb-3" role="alert">
+                        <i class="bi bi-exclamation-circle-fill me-1"></i> {{ $message }}
+                    </div>
+                @enderror
             </div>
             
-            <span class="input-group-text bg-white border-0 border-start fw-bold px-3">÷</span>
+            <div class="flex-fill">
+                @if(session("juros"))
+                    <div class="alert alert-danger py-2 mb-3" role="alert">
+                        <i class="bi bi-exclamation-circle-fill me-1"></i> {{ session("juros") }}
+                    </div>
+                @endif
+            </div>
+        </div>
+
+        <div class="input-group input-group-lg mb-3">
+            <span class="input-group-text"><i class="bi bi-coin me-1"></i>Taxa</span>
             
-            <input type="number" id="numero_meses" name="numero_meses" class="form-control text-end" placeholder="00" aria-label="NumeroMeses" value="{{ old("numero_meses") }}">
+            <input type="number" id="taxa" name="taxa" class="form-control text-end" placeholder="00,0" aria-label="Taxa" value="{{ old("taxa") }}">
             
-            <span class="input-group-text"><i class="bi bi-calendar2-date me-1"></i>Nº Meses</span>
+            <input type="number" id="tempo" name="tempo" class="form-control text-end" placeholder="00" aria-label="Tempo" min="0" max="99" value="{{ old("tempo") }}">
+
+            <span class="input-group-text"><i class="bi bi-stopwatch me-1"></i>Tempo(Meses)</span>
         </div>
         
         <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
             <div class="flex-fill">
-                @error("valor")
+                @error("taxa")
                     <div class="alert alert-danger py-2 mb-0" role="alert">
                         <i class="bi bi-exclamation-circle-fill me-1"></i> {{ $message }}
                     </div>
@@ -42,15 +60,7 @@
             </div>
             
             <div class="flex-fill">
-                @if(session("taxa"))
-                    <div class="alert alert-danger py-2 mb-0" role="alert">
-                        <i class="bi bi-exclamation-circle-fill me-1"></i> {{ session("taxa") }}
-                    </div>
-                @endif
-            </div>
-            
-            <div class="flex-fill">
-                @error("numero_meses")
+                @error("tempo")
                     <div class="alert alert-danger py-2 mb-0" role="alert">
                         <i class="bi bi-exclamation-circle-fill me-1"></i> {{ $message }}
                     </div>
@@ -75,7 +85,7 @@
                 <i class="bi bi-calculator-fill me-2"></i> Calcular
             </button>
             
-            <button type="button" id="limpar" class="btn btn-outline-secondary fw-semibold px-4" onclick="limparCampos06()">
+            <button type="button" id="limpar" class="btn btn-outline-secondary fw-semibold px-4" onclick="limparCampos03()">
                 <i class="bi bi-x-circle me-2"></i> Limpar
             </button>
         </div>
@@ -87,25 +97,6 @@
         $(document).ready(function() {
             $("#valor").mask("##0.00", { reverse: true });
             $("#taxa").mask("##0.00", { reverse: true });
-            $("#numero_meses").mask("00");
-
-            const sem_juros = $("#sem_juros");
-            const taxa = $("#taxa");
-
-            function aplicarMascara() {
-                if (sem_juros.is(":checked")) {
-                    taxa.val("");
-                    taxa.prop("disabled", true);
-                } else {
-                    taxa.prop("disabled", false);
-                }
-            }
-
-            sem_juros.change(function() {
-                aplicarMascara();
-            });
-
-            aplicarMascara();
         });
     </script>
 @endsection

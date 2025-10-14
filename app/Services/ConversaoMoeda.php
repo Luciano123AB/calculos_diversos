@@ -7,7 +7,6 @@ class ConversaoMoeda
     public static function calcular($valor, $moeda) {
 
         $valor = floatval($valor);
-        $moeda = $moeda;
         $resultado = 0.0;
 
         if ($moeda == "Dólar") {

@@ -71,7 +71,7 @@
 
     <script>
         $(document).ready(function() {
-            $("#valor").mask("0000.00");
+            $("#valor").mask("##0.00", { reverse: true });
 
             const fixo = $("#fixo");
             const desconto = $("#desconto");
