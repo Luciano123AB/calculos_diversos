@@ -96,7 +96,7 @@
     <script>
         $(document).ready(function() {
             $("#valor").mask("##0.00", { reverse: true });
-            $("#taxa").mask("##0.00", { reverse: true });
+            $("#taxa").mask("##0.0", { reverse: true });
         });
     </script>
 @endsection
