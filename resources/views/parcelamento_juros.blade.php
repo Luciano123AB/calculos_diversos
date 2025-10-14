@@ -13,7 +13,7 @@
             
             <span class="input-group-text bg-white border-0 fw-bold px-3">×</span>
             
-            <input type="number" id="taxa" name="taxa" class="form-control text-end" placeholder="0,0" aria-label="Taxa" value="{{ old("taxa") }}">
+            <input type="number" id="taxa" name="taxa" class="form-control text-end" placeholder="00,0" aria-label="Taxa" value="{{ old("taxa") }}">
             
             <span class="input-group-text"><i class="bi bi-coin me-1"></i>Taxa</span>
             
@@ -85,8 +85,8 @@
 
     <script>
         $(document).ready(function() {
-            $("#valor").mask("000000.00");
-            $("#taxa").mask("0.0");
+            $("#valor").mask("##0.00", { reverse: true });
+            $("#taxa").mask("##0.0", { reverse: true });
             $("#numero_meses").mask("00");
 
             const sem_juros = $("#sem_juros");

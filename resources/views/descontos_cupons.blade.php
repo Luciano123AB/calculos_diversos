@@ -71,7 +71,7 @@
 
     <script>
         $(document).ready(function() {
-            $("#valor").mask("0000.00");
+            $("#valor").mask("##0.00", { reverse: true });
 
             const fixo = $("#fixo");
             const desconto = $("#desconto");
@@ -88,7 +88,7 @@
                 if (fixo.is(":checked")) {
                     desconto.mask("000");
                 } else {
-                    desconto.mask("000.0");
+                    desconto.mask("##0.0", { reverse: true });
                 }
             }        
         });
