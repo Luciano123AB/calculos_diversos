@@ -8,6 +8,7 @@ use App\Services\Frete;
 use App\Services\Impostos;
 use App\Services\JurosCompostosSimples;
 use App\Services\ParcelamentoJuros;
+use App\Services\PrevisaGanhosPerdas;
 use App\Services\SubtotalTotalCompras;
 use App\Services\TaxasPercentuais;
 use Illuminate\Http\Request;
@@ -218,6 +219,27 @@ class Calculos
         $taxa = $request->input("taxa");
         
         session(["resultado" => number_format(TaxasPercentuais::calcular($valor, $taxa), 2, ",", ".")]);
+
+        return redirect()->back();
+    }
+
+    public function calcularPrevisaoGanhosPerdas(Request $request) {
+        $request->validate(
+            [
+                "receita" => "required",
+                "despesa" => "required"
+            ],
+
+            [
+                "receita.required" => "Insira a receita.",
+                "despesa.required" => "Insira a despesa."
+            ]
+        );
+
+        $receita = $request->input("receita");
+        $despesa = $request->input("despesa");
+        
+        session(["resultado" => number_format(PrevisaGanhosPerdas::calcular($receita, $despesa), 2, ",", ".")]);
 
         return redirect()->back();
     }

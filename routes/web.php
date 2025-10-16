@@ -40,6 +40,8 @@ Route::post("/calcular_taxas_percentuais", [Calculos::class, "calcularTaxasPerce
 
 Route::get("/previsao_ganhos_perdas", [MainController::class, "previsaoGanhosPerdas"])->name("PrevisaoGanhosPerdas");
 
+Route::post("/calcular_previsao_ganhos_perdas", [Calculos::class, "calcularPrevisaoGanhosPerdas"])->name("CalcularPrevisaoGanhosPerdas");
+
 Route::get("/validacao", [MainController::class, "validacao"])->name("Validacao");
 
 Route::get("/imc", [MainController::class, "imc"])->name("Imc");

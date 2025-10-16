@@ -95,7 +95,13 @@ class MainController
     }
 
     public function previsaoGanhosPerdas() {
-        echo "Previsao Ganhos Perdas";
+        return view("previsao_ganhos_perdas")->with("textos",
+            [
+                "h2" => "Previsão de",
+                "span" => "Ganhos e Perdas",
+                "h5" => "o total"
+            ]
+        );
     }
 
     public function validacao() {
