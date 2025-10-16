@@ -85,7 +85,13 @@ class MainController
     }
 
     public function taxasPercentuais() {
-        echo "Taxas Percentuais";
+        return view("taxas_Percentuais")->with("textos",
+            [
+                "h2" => "Taxas e",
+                "span" => "Percentuais",
+                "h5" => "o total"
+            ]
+        );
     }
 
     public function previsaoGanhosPerdas() {

@@ -9,6 +9,7 @@ use App\Services\Impostos;
 use App\Services\JurosCompostosSimples;
 use App\Services\ParcelamentoJuros;
 use App\Services\SubtotalTotalCompras;
+use App\Services\TaxasPercentuais;
 use Illuminate\Http\Request;
 
 class Calculos
@@ -196,6 +197,27 @@ class Calculos
         }
         
         session(["resultado" => number_format(JurosCompostosSimples::calcular($valor, $juros, $taxa, $tempo), 2, ",", ".")]);
+
+        return redirect()->back();
+    }
+
+    public function calcularTaxasPercentuais(Request $request) {
+        $request->validate(
+            [
+                "valor" => "required",
+                "taxa" => "required"
+            ],
+
+            [
+                "valor.required" => "Insira o valor.",
+                "taxa.required" => "Insira a taxa."
+            ]
+        );
+
+        $valor = $request->input("valor");
+        $taxa = $request->input("taxa");
+        
+        session(["resultado" => number_format(TaxasPercentuais::calcular($valor, $taxa), 2, ",", ".")]);
 
         return redirect()->back();
     }

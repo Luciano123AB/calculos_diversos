@@ -36,6 +36,8 @@ Route::post("/calcular_juros_compostos_simples", [Calculos::class, "calcularJuro
 
 Route::get("/taxas_percentuais", [MainController::class, "taxasPercentuais"])->name("TaxasPercentuais");
 
+Route::post("/calcular_taxas_percentuais", [Calculos::class, "calcularTaxasPercentuais"])->name("CalcularTaxasPercentuais");
+
 Route::get("/previsao_ganhos_perdas", [MainController::class, "previsaoGanhosPerdas"])->name("PrevisaoGanhosPerdas");
 
 Route::get("/validacao", [MainController::class, "validacao"])->name("Validacao");
