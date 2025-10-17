@@ -11,6 +11,7 @@ use App\Services\ParcelamentoJuros;
 use App\Services\PrevisaGanhosPerdas;
 use App\Services\SubtotalTotalCompras;
 use App\Services\TaxasPercentuais;
+use App\Services\Validacao;
 use Illuminate\Http\Request;
 
 class Calculos
@@ -240,6 +241,51 @@ class Calculos
         $despesa = $request->input("despesa");
         
         session(["resultado" => number_format(PrevisaGanhosPerdas::calcular($receita, $despesa), 2, ",", ".")]);
+
+        return redirect()->back();
+    }
+
+    public function calcularValidacao(Request $request) {
+
+        $tipo = $request->input("dados");
+
+        if ($tipo === "Selecione o dado") {
+            return redirect()->back()->withInput()->withErrors(["dado" => "Selecione primeiro o tipo de dado."]);
+        }
+
+        $request->validate(
+            [
+                "dado" => "required"
+            ],
+
+            [
+                "dado.required" => "Insira o dado."
+            ]
+        );
+
+        $dado = trim($request->input("dado"));
+
+        switch ($tipo) {
+            case "cpf":
+                if (strlen($dado) < 14) {
+                    return redirect()->back()->withInput()->withErrors(["dado" => "O CPF deve ter 14 dígitos."]);
+                }
+
+                session(["resultado" => Validacao::validarCpf($dado)]);
+            break;
+
+            case "cnpj":
+                if (strlen($dado) < 18) {
+                    return redirect()->back()->withInput()->withErrors(["dado" => "O CNPJ deve ter 18 dígitos."]);
+                }
+
+                session(["resultado" => Validacao::validarCnpj($dado)]);
+            break;
+
+            case "idade":
+                session(["resultado" => Validacao::validarIdade($dado)]);
+            break;
+        }
 
         return redirect()->back();
     }

@@ -107,9 +107,9 @@ class MainController
     public function validacao() {
         return view("validacao")->with("textos",
             [
-                "h2" => "Aplicar a",
-                "span" => "Validação",
-                "h5" => "a validação"
+                "h2" => "Validar",
+                "span" => "Dados",
+                "h5" => "o resultado"
             ]
         );
     }
