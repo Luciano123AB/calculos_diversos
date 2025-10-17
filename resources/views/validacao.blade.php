@@ -76,7 +76,7 @@
                 <i class="bi bi-calculator-fill me-2"></i> Validar
             </button>
                         
-            <button type="button" id="limpar" class="btn btn-outline-secondary fw-semibold px-4" onclick="limparCampos01()">
+            <button type="button" id="limpar" class="btn btn-outline-secondary fw-semibold px-4" onclick="limparCampos10()">
                 <i class="bi bi-x-circle me-2"></i> Limpar
             </button>
         </div>
