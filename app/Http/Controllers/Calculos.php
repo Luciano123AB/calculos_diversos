@@ -49,26 +49,4 @@ class Calculos
 
         return redirect()->back();
     }
-
-    public function calcularFrete(Request $request) {
-        $request->validate(
-            [
-                "valor_km" => "required",
-                "distancia" => "required"
-            ],
-
-            [
-                "valor_km.required" => "Insira o valor por Km.",
-                "distancia.required" => "Insira a distância."
-            ]
-        );
-        
-        $valor_km = floatval($request->input("valor_km"));
-        $distancia = intval($request->input("distancia"));
-        $total = $valor_km * $distancia;
-
-        session(["resultado" => number_format($total, 2, ",", ".")]);
-
-        return redirect()->back();
-    }
 }

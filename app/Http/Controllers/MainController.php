@@ -23,7 +23,7 @@ class MainController
     }
 
     public function frete() {
-        return view("frete");
+        echo "Frete";
     }
 
     public function impostos() {
