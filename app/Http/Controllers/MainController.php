@@ -105,58 +105,142 @@ class MainController
     }
 
     public function validacao() {
-        echo "Validacao";
+        return view("validacao")->with("textos",
+            [
+                "h2" => "Aplicar a",
+                "span" => "Validação",
+                "h5" => "a validação"
+            ]
+        );
     }
 
     public function imc() {
-        echo "IMC";
+        return view("imc")->with("textos",
+            [
+                "h2" => "Descobrir o",
+                "span" => "IMC",
+                "h5" => "o imc"
+            ]
+        );
     }
 
     public function conversoresDiversos() {
-        echo "Conversores Diversos";
+        return view("conversores_diversos")->with("textos",
+            [
+                "h2" => "Conversores",
+                "span" => "Diversos",
+                "h5" => "o valor"
+            ]
+        );
     }
 
     public function mediasSomasMedianasPercentuais() {
-        echo "Medias Somas Medianas Percentuais";
+        return view("medias_somas_medianas_percentuais")->with("textos",
+            [
+                "h2" => "Medias | Somas",
+                "span" => "Medianas | Percentuais",
+                "h5" => "o total"
+            ]
+        );
     }
 
     public function graficosDinamicos() {
-        echo "Graficos Dinamicos";
+        return view("graficos_dinamicos")->with("textos",
+            [
+                "h2" => "Gráficos",
+                "span" => "Dinâmicos",
+                "h5" => "o resultado"
+            ]
+        );
     }
 
     public function relatoriosDesempenho() {
-        echo "Relatorios Desempenho";
+        return view("relatorios_desempenho")->with("textos",
+            [
+                "h2" => "Relatórios e",
+                "span" => "Desempenho",
+                "h5" => "o resultado"
+            ]
+        );
     }
 
     public function TaxaConversao() {
-        echo "Taxa Conversao";
+        return view("taxa_conversao")->with("textos",
+            [
+                "h2" => "Taxa de",
+                "span" => "Conversão",
+                "h5" => "o total"
+            ]
+        );
     }
 
     public function comparacoesValores() {
-        echo "Comparacoes Valores";
+        return view("comparacoes_valores")->with("textos",
+            [
+                "h2" => "Comparações de",
+                "span" => "Valores",
+                "h5" => "o resultado"
+            ]
+        );
     }
 
     public function pontuacoes() {
-        echo "Pontuacoes";
+        return view("pontuacoes")->with("textos",
+            [
+                "h2" => "Obter a",
+                "span" => "Pontuação",
+                "h5" => "o total"
+            ]
+        );
     }
 
     public function verificacaoLimitesRegras() {
-        echo "Verificacao Limites Regras";
+        return view("verificacao_limites_regras")->with("textos",
+            [
+                "h2" => "Verificação de",
+                "span" => "Limites e Regras",
+                "h5" => "o resultado"
+            ]
+        );
     }
 
     public function distanciaGeografica() {
-        echo "Distancia Geografica";
+        return view("distancia_geografica")->with("textos",
+            [
+                "h2" => "Distância",
+                "span" => "Geográfica",
+                "h5" => "o resultado"
+            ]
+        );
     }
 
     public function tempoExecusaoCronometros() {
-        echo "Tempo Execusao Cronometros";
+        return view("tempo_execusao_cronometros")->with("textos",
+            [
+                "h2" => "Tempo de Execução",
+                "span" => "e Cronômetros",
+                "h5" => "o tempo"
+            ]
+        );
     }
 
     public function fisicos() {
-        echo "Fisicos";
+        return view("fisicos")->with("textos",
+            [
+                "h2" => "Cálculos",
+                "span" => "Físicos",
+                "h5" => "o consumo"
+            ]
+        );
     }
 
     public function algoritmosRecomendacaoRanqueamento() {
-        echo "Algoritmos Recomendacao Ranqueamento";
+        return view("algoritmos_recomendacao_ranqueamento")->with("textos",
+            [
+                "h2" => "Algoritmos de Recomendação",
+                "span" => "e Ranqueamento",
+                "h5" => "o resultado"
+            ]
+        );
     }
 }
