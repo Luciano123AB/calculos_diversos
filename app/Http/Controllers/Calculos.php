@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\ConversaoMoeda;
 use App\Services\DescontosCupons;
 use App\Services\Frete;
+use App\Services\Imc;
 use App\Services\Impostos;
 use App\Services\JurosCompostosSimples;
 use App\Services\ParcelamentoJuros;
@@ -286,6 +287,28 @@ class Calculos
                 session(["resultado" => Validacao::validarIdade($dado)]);
             break;
         }
+
+        return redirect()->back();
+    }
+
+    public function calcularImc(Request $request) {
+        $request->validate(
+            [
+                "peso" => "required",
+                "altura" => "required"
+            ],
+
+            [
+                "peso.required" => "Insira o peso.",
+                "altura.required" => "Insira a altura."
+            ]
+        );
+
+        $peso = $request->input("peso");
+        $altura = $request->input("altura");
+        
+        session(["resultado" => number_format(Imc::calcular($peso, $altura), 2, ".")]);
+        session(["classificacao" => Imc::classificar(number_format(Imc::calcular($peso, $altura), 2, "."))]);
 
         return redirect()->back();
     }

@@ -76,4 +76,9 @@
             
         }
     }
+
+    function limparCampos11() {
+        document.getElementById("peso").value = "";
+        document.getElementById("altura").value = "";
+    }
 </script>
