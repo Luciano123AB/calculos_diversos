@@ -85,7 +85,7 @@
                 <i class="bi bi-calculator-fill me-2"></i> Calcular
             </button>
             
-            <button type="button" id="limpar" class="btn btn-outline-secondary fw-semibold px-4" onclick="limparCampos03()">
+            <button type="button" id="limpar" class="btn btn-outline-secondary fw-semibold px-4" onclick="limparCampos07()">
                 <i class="bi bi-x-circle me-2"></i> Limpar
             </button>
         </div>
