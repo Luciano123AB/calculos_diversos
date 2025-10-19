@@ -81,4 +81,19 @@
         document.getElementById("peso").value = "";
         document.getElementById("altura").value = "";
     }
+
+    function limparCampos12() {
+
+        var valor = document.getElementById("valor");
+        var escolha = document.getElementById("escolha");
+
+        valor.value = "";
+        valor.disabled = true;
+        
+        if (escolha) {
+
+            escolha.selectedIndex = 0;
+            
+        }
+    }
 </script>

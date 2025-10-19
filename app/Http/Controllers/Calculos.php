@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\ConversaoMoeda;
+use App\Services\ConversoresDiversos;
 use App\Services\DescontosCupons;
 use App\Services\Frete;
 use App\Services\Imc;
@@ -309,6 +310,58 @@ class Calculos
         
         session(["resultado" => number_format(Imc::calcular($peso, $altura), 2, ".")]);
         session(["classificacao" => Imc::classificar(number_format(Imc::calcular($peso, $altura), 2, "."))]);
+
+        return redirect()->back();
+    }
+
+    public function calcularConversoresDiversos(Request $request) {
+
+        $escolha = $request->input("escolha");
+
+        if ($escolha == "Selecione o conversor") {
+            return redirect()->back()->withInput()->withErrors(["escolha" => "Selecione primeiro o conversor."]);
+        }
+
+        $request->validate(
+            [
+                "valor" => "required"
+            ],
+
+            [
+                "valor.required" => "Insira o valor."
+            ]
+        );
+
+        $valor = $request->input("valor");
+        $simbolo = "";
+
+        if ($escolha == "Celsius") {
+
+            $simbolo = "°C";
+
+            session(["resultado" => number_format(ConversoresDiversos::calcular($valor, $escolha), 1, ",") . " $simbolo"]);
+        }
+
+        if ($escolha == "Fahrenheit") {
+            
+            $simbolo = "°F";
+
+            session(["resultado" => number_format(ConversoresDiversos::calcular($valor, $escolha), 1, ",") . " $simbolo"]);
+        }
+
+        if ($escolha == "Quilômetros") {
+
+            $simbolo = "Km";
+
+            session(["resultado" => number_format(ConversoresDiversos::calcular($valor, $escolha), 1, ",") . " $simbolo"]);
+        }
+
+        if ($escolha == "Milhas") {
+
+            $simbolo = "milhas";
+
+            session(["resultado" => ConversoresDiversos::calcular($valor, $escolha) . " $simbolo"]);
+        }        
 
         return redirect()->back();
     }
