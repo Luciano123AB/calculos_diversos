@@ -55,9 +55,6 @@ Route::prefix('/')->group(function () {
     Route::get('taxa_conversao', [MainController::class, "taxaConversao"])->name("TaxaConversao");
     Route::post('calcular_taxa_conversao', [Calculos::class, "calcularTaxaConversao"])->name("CalcularTaxaConversao");
 
-    Route::get('comparacoes_valores', [MainController::class, "comparacoesValores"])->name("ComparacoesValores");
-    Route::post('calcular_comparacoes_valores', [Calculos::class, "calcularComparacoesValores"])->name("CalcularComparacoesValores");
-
     Route::get('pontuacoes', [MainController::class, "pontuacoes"])->name("Pontuacoes");
     Route::post('calcular_pontuacoes', [Calculos::class, "calcularPontuacoes"])->name("CalcularPontuacoes");
 

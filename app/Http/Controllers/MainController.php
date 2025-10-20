@@ -174,16 +174,6 @@ class MainController
         );
     }
 
-    public function comparacoesValores() {
-        return view("comparacoes_valores")->with("textos",
-            [
-                "h2" => "Comparações de",
-                "span" => "Valores",
-                "h5" => "o resultado"
-            ]
-        );
-    }
-
     public function pontuacoes() {
         return view("pontuacoes")->with("textos",
             [
