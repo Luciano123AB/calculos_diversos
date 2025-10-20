@@ -151,4 +151,11 @@
         document.getElementById("permitidos").value = "";
         document.getElementById("negados").value = "";
     }
+
+    function limparCampos15() {
+        document.getElementById("venda01").value = "";
+        document.getElementById("venda02").value = "";
+        document.getElementById("venda03").value = "";
+        document.getElementById("venda04").value = "";
+    }
 </script>

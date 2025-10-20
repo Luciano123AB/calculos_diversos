@@ -13,6 +13,7 @@ use App\Services\JurosCompostosSimples;
 use App\Services\MediasSomasMedianasPercentuais;
 use App\Services\ParcelamentoJuros;
 use App\Services\PrevisaGanhosPerdas;
+use App\Services\RelatoriosDesempenho;
 use App\Services\SubtotalTotalCompras;
 use App\Services\TaxasPercentuais;
 use App\Services\Validacao;
@@ -477,6 +478,41 @@ class Calculos
                 "permitidos" => $permitidos,
                 "negados" => $negados,
                 "total" => GraficosDinamicos::calcular($permitidos, $negados)
+            ]
+        );
+
+        return redirect()->back();
+    }
+
+    public function calcularRelatoriosDesempenho(Request $request) {
+        $request->validate(
+            [
+                "venda01" => "required",
+                "venda02" => "required",
+                "venda03" => "required",
+                "venda04" => "required"
+            ],
+
+            [
+                "venda01.required" => "Insira a venda 1.",
+                "venda02.required" => "Insira a venda 2.",
+                "venda03.required" => "Insira a venda 3.",
+                "venda04.required" => "Insira a venda 4."
+            ]
+        );
+
+        $venda01 = $request->input("venda01");
+        $venda02 = $request->input("venda02");
+        $venda03 = $request->input("venda03");
+        $venda04 = $request->input("venda04");
+
+        session(
+            [
+                "total" => number_format(RelatoriosDesempenho::calcularTotal($venda01, $venda02, $venda03, $venda04), 2, ","),
+                "media" => number_format(RelatoriosDesempenho::calcularMedia($venda01, $venda02, $venda03, $venda04), 2, ","),
+                "melhor" => number_format(RelatoriosDesempenho::calcularMelhor($venda01, $venda02, $venda03, $venda04), 2, ","),
+                "pior" => number_format(RelatoriosDesempenho::calcularPior($venda01, $venda02, $venda03, $venda04), 2, ","),
+                "taxa" => number_format(RelatoriosDesempenho::calcularTaxa($venda01, $venda02, $venda03, $venda04), 2, ",")
             ]
         );
 
