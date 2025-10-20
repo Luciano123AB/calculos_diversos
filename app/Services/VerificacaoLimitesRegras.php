@@ -4,9 +4,16 @@ namespace App\Services;
 
 class VerificacaoLimitesRegras
 {
-    public static function calcular($valor01, $valor02) {
+    public static function calcular($idade, $renda) {
+        if ($idade >= 18 && $renda >= 2000) {
 
-        $resultado = "";
+            $resultado = "APROVADO";
+
+        } else {
+
+            $resultado = "REPROVADO";
+
+        }
 
         return $resultado;
     }

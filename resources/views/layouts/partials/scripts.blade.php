@@ -168,4 +168,9 @@
         document.getElementById("acertos").value = "";
         document.getElementById("total_questoes").value = "";
     }
+
+    function limparCampos18() {
+        document.getElementById("idade").value = "";
+        document.getElementById("renda").value = "";
+    }
 </script>

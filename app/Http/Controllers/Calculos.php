@@ -19,6 +19,7 @@ use App\Services\SubtotalTotalCompras;
 use App\Services\TaxaConversao;
 use App\Services\TaxasPercentuais;
 use App\Services\Validacao;
+use App\Services\VerificacaoLimitesRegras;
 use Illuminate\Http\Request;
 
 class Calculos
@@ -564,6 +565,27 @@ class Calculos
                 "total" => number_format(Pontuacoes::calcularTotal($total_questoes), 1, ",")
             ]
         );
+
+        return redirect()->back();
+    }
+
+    public function calcularVerificacaoLimitesRegras(Request $request) {
+        $request->validate(
+            [
+                "idade" => "required",
+                "renda" => "required"
+            ],
+
+            [
+                "idade.required" => "Insira a idade.",
+                "renda.required" => "Insira a renda."
+            ]
+        );
+
+        $idade = $request->input("idade");
+        $renda = $request->input("renda");
+
+        session(["resultado" => VerificacaoLimitesRegras::calcular($idade, $renda)]);
 
         return redirect()->back();
     }
