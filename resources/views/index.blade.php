@@ -86,8 +86,6 @@
                             <h5 class="fw-bold mb-3 text-center text-secondary">Lógicos / Condicionais</h5>
                             
                             <div class="d-grid gap-3">
-                                <a href="{{ route('ComparacoesValores') }}" class="btn btn-outline-info fw-semibold">Comparações de Valores</a>
-                                
                                 <a href="{{ route('Pontuacoes') }}" class="btn btn-outline-info fw-semibold">Pontuações</a>
                                 
                                 <a href="{{ route('VerificacaoLimitesRegras') }}" class="btn btn-outline-info fw-semibold">Verificação de Limites / Regras</a>
