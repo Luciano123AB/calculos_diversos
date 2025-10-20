@@ -139,7 +139,7 @@ class MainController
             [
                 "h2" => "Medias | Somas",
                 "span" => "Medianas | Percentuais",
-                "h5" => "o total"
+                "h5" => "o resultado"
             ]
         );
     }

@@ -9,6 +9,7 @@ use App\Services\Frete;
 use App\Services\Imc;
 use App\Services\Impostos;
 use App\Services\JurosCompostosSimples;
+use App\Services\MediasSomasMedianasPercentuais;
 use App\Services\ParcelamentoJuros;
 use App\Services\PrevisaGanhosPerdas;
 use App\Services\SubtotalTotalCompras;
@@ -364,5 +365,100 @@ class Calculos
         }        
 
         return redirect()->back();
+    }
+
+    public function calcularMediasSomasMedianasPercentuais(Request $request) {
+
+        $media = $request->boolean("media");
+        $mediana = $request->boolean("mediana");
+        $percentual = $request->boolean("percentual");
+        $nota01 = $request->input("nota01");
+        $nota02 = $request->input("nota02");
+        $nota03 = $request->input("nota03");
+        $numero01 = $request->input("numero01");
+        $numero02 = $request->input("numero02");
+        $numero03 = $request->input("numero03");
+        $numero04 = $request->input("numero04");
+        $quantidade = $request->input("quantidade");
+        $total = $request->input("total");
+
+        if (!$media && !$mediana && !$percentual) {
+            return redirect()->back()->withInput()->with("escolha", "Escolha um cálculo.");
+        } else {
+            if ($media) {
+    
+                $errors = [];
+    
+                if ($nota01 === "" || $nota01 === null) {
+                    $errors['nota01'] = "Insira a nota 1.";
+                }
+    
+                if ($nota02 === "" || $nota02 === null) {
+                    $errors['nota02'] = "Insira a nota 2.";
+                }
+    
+                if ($nota03 === "" || $nota03 === null) {
+                    $errors['nota03'] = "Insira a nota 3.";
+                }
+    
+                if (!empty($errors)) {
+                    return redirect()->back()->withInput()->withErrors($errors);
+                }
+    
+                session(["resultado_media" => number_format(MediasSomasMedianasPercentuais::calcularMedia($nota01, $nota02, $nota03), 1, ".")]);
+    
+                return redirect()->back();
+            } else if ($mediana) {
+
+                $errors = [];
+    
+                if ($numero01 === "" || $numero01 === null) {
+                    $errors['numero01'] = "Insira a número 1.";
+                }
+    
+                if ($numero02 === "" || $numero02 === null) {
+                    $errors['numero02'] = "Insira a número 2.";
+                }
+    
+                if ($numero03 === "" || $numero03 === null) {
+                    $errors['numero03'] = "Insira a número 3.";
+                }
+
+                if ($numero04 === "" || $numero04 === null) {
+                    $errors['numero03'] = "Insira a número 3.";
+                }
+    
+                if (!empty($errors)) {
+                    return redirect()->back()->withInput()->withErrors($errors);
+                }
+
+                $numeros = [$numero01, $numero02, $numero03, $numero04];
+    
+                session(
+                    [
+                        "resultado_mediana" => number_format(MediasSomasMedianasPercentuais::calcularMediana($numero01, $numero02, $numero03, $numero04), 1, ","),
+                        "numeros" => implode(", ", $numeros)
+                    ]
+                );
+    
+                return redirect()->back();
+            } else if ($percentual) {
+                $request->validate(
+                    [
+                        "quantidade" => "required",
+                        "total" => "required"
+                    ],
+    
+                    [
+                        "quantidade.required" => "Insira a quantidade.",
+                        "total.required" => "Insira o total."
+                    ]
+                );
+    
+                session(["resultado_percentual" => number_format(MediasSomasMedianasPercentuais::calcularPercentual($quantidade, $total), 2, ",")]);
+    
+                return redirect()->back();
+            }
+        }
     }
 }
