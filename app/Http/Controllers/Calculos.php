@@ -12,6 +12,7 @@ use App\Services\Impostos;
 use App\Services\JurosCompostosSimples;
 use App\Services\MediasSomasMedianasPercentuais;
 use App\Services\ParcelamentoJuros;
+use App\Services\Pontuacoes;
 use App\Services\PrevisaGanhosPerdas;
 use App\Services\RelatoriosDesempenho;
 use App\Services\SubtotalTotalCompras;
@@ -537,6 +538,32 @@ class Calculos
         $numero_visitas = $request->input("numero_visitas");
 
         session(["resultado" => number_format(TaxaConversao::calcular($numero_conversoes, $numero_visitas), 2, ",")]);
+
+        return redirect()->back();
+    }
+
+    public function calcularPontuacoes(Request $request) {
+        $request->validate(
+            [
+                "acertos" => "required",
+                "total_questoes" => "required"
+            ],
+
+            [
+                "acertos.required" => "Insira o n/acertos.",
+                "total_questoes.required" => "Insira o t/questões."
+            ]
+        );
+
+        $acertos = $request->input("acertos");
+        $total_questoes = $request->input("total_questoes");
+
+        session(
+            [
+                "pontos" => number_format(Pontuacoes::calcularPontos($acertos), 1, ","),
+                "total" => number_format(Pontuacoes::calcularTotal($total_questoes), 1, ",")
+            ]
+        );
 
         return redirect()->back();
     }

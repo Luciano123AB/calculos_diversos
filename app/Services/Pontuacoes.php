@@ -4,9 +4,18 @@ namespace App\Services;
 
 class Pontuacoes
 {
-    public static function calcular($valor01, $valor02) {
+    public static function calcularPontos($acertos) {
 
-        $resultado = "";
+        $pontos_acerto = 1.5;
+        $resultado = $pontos_acerto * $acertos;
+
+        return $resultado;
+    }
+
+    public static function calcularTotal($total_questoes) {
+
+        $pontos_acerto = 1.5;
+        $resultado = $pontos_acerto * $total_questoes;
 
         return $resultado;
     }

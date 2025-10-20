@@ -163,4 +163,9 @@
         document.getElementById("numero_conversoes").value = "";
         document.getElementById("numero_visitas").value = "";
     }
+
+    function limparCampos17() {
+        document.getElementById("acertos").value = "";
+        document.getElementById("total_questoes").value = "";
+    }
 </script>
