@@ -184,11 +184,8 @@
                 @php
 
                     $mediana = session("resultado_mediana");
-                    $numeros = session("numeros");
 
                 @endphp
-
-                <h5 class="fw-normal text-secondary">Números: <span class="fw-bold text-success">{{ $numeros }}</span></h5>
 
                 <h4 class="fw-normal text-secondary">
                     Resultado: <span class="fw-bold text-success">{{ $mediana }}</span>

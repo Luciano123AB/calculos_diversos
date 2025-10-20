@@ -431,15 +431,8 @@ class Calculos
                 if (!empty($errors)) {
                     return redirect()->back()->withInput()->withErrors($errors);
                 }
-
-                $numeros = [$numero01, $numero02, $numero03, $numero04];
     
-                session(
-                    [
-                        "resultado_mediana" => number_format(MediasSomasMedianasPercentuais::calcularMediana($numero01, $numero02, $numero03, $numero04), 1, ","),
-                        "numeros" => implode(", ", $numeros)
-                    ]
-                );
+                session(["resultado_mediana" => number_format(MediasSomasMedianasPercentuais::calcularMediana($numero01, $numero02, $numero03, $numero04), 1, ",")]);
     
                 return redirect()->back();
             } else if ($percentual) {
