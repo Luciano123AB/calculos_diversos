@@ -6,6 +6,7 @@ use App\Services\ConversaoMoeda;
 use App\Services\ConversoresDiversos;
 use App\Services\DescontosCupons;
 use App\Services\Frete;
+use App\Services\GraficosDinamicos;
 use App\Services\Imc;
 use App\Services\Impostos;
 use App\Services\JurosCompostosSimples;
@@ -453,5 +454,32 @@ class Calculos
                 return redirect()->back();
             }
         }
+    }
+
+    public function exibirGraficosDinamicos(Request $request) {
+        $request->validate(
+            [
+                "permitidos" => "required",
+                "negados" => "required"
+            ],
+
+            [
+                "permitidos.required" => "Insira os permitidos.",
+                "negados.required" => "Insira os negados."
+            ]
+        );
+
+        $permitidos = $request->input("permitidos");
+        $negados = $request->input("negados");
+
+        session(
+            [
+                "permitidos" => $permitidos,
+                "negados" => $negados,
+                "total" => GraficosDinamicos::calcular($permitidos, $negados)
+            ]
+        );
+
+        return redirect()->back();
     }
 }

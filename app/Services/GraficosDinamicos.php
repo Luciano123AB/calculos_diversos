@@ -4,9 +4,9 @@ namespace App\Services;
 
 class GraficosDinamicos
 {
-    public static function calcular($valor01, $valor02) {
+    public static function calcular($permitidos, $negados) {
 
-        $resultado = "";
+        $resultado = $permitidos + $negados;
 
         return $resultado;
     }

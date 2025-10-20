@@ -47,7 +47,7 @@ Route::prefix('/')->group(function () {
     Route::post('calcular_medias_somas_medianas_percentuais', [Calculos::class, "calcularMediasSomasMedianasPercentuais"])->name("CalcularMediasSomasMedianasPercentuais");
 
     Route::get('graficos_dinamicos', [MainController::class, "graficosDinamicos"])->name("GraficosDinamicos");
-    Route::post('calcular_graficos_dinamicos', [Calculos::class, "calcularGraficosDinamicos"])->name("CalcularGraficosDinamicos");
+    Route::post('exibir_graficos_dinamicos', [Calculos::class, "exibirGraficosDinamicos"])->name("ExibirGraficosDinamicos");
 
     Route::get('relatorios_desempenho', [MainController::class, "relatoriosDesempenho"])->name("RelatoriosDesempenho");
     Route::post('calcular_relatorios_desempenho', [Calculos::class, "calcularRelatoriosDesempenho"])->name("CalcularRelatoriosDesempenho");

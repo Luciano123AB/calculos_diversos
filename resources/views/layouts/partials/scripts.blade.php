@@ -146,4 +146,9 @@
 
         }
     }
+
+    function limparCampos14() {
+        document.getElementById("permitidos").value = "";
+        document.getElementById("negados").value = "";
+    }
 </script>
