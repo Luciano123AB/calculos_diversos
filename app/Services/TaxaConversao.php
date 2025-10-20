@@ -4,9 +4,9 @@ namespace App\Services;
 
 class TaxaConversao
 {
-    public static function calcular($valor01, $valor02) {
+    public static function calcular($numero_conversoes, $numero_visitas) {
 
-        $resultado = "";
+        $resultado = ($numero_conversoes / $numero_visitas) * 100;
 
         return $resultado;
     }

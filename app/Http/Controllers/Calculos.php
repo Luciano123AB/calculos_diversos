@@ -15,6 +15,7 @@ use App\Services\ParcelamentoJuros;
 use App\Services\PrevisaGanhosPerdas;
 use App\Services\RelatoriosDesempenho;
 use App\Services\SubtotalTotalCompras;
+use App\Services\TaxaConversao;
 use App\Services\TaxasPercentuais;
 use App\Services\Validacao;
 use Illuminate\Http\Request;
@@ -515,6 +516,27 @@ class Calculos
                 "taxa" => number_format(RelatoriosDesempenho::calcularTaxa($venda01, $venda02, $venda03, $venda04), 2, ",")
             ]
         );
+
+        return redirect()->back();
+    }
+
+    public function calcularTaxaConversao(Request $request) {
+        $request->validate(
+            [
+                "numero_conversoes" => "required",
+                "numero_visitas" => "required"
+            ],
+
+            [
+                "numero_conversoes.required" => "Insira o n/conversões.",
+                "numero_visitas.required" => "Insira o n/visitas."
+            ]
+        );
+
+        $numero_conversoes = $request->input("numero_conversoes");
+        $numero_visitas = $request->input("numero_visitas");
+
+        session(["resultado" => number_format(TaxaConversao::calcular($numero_conversoes, $numero_visitas), 2, ",")]);
 
         return redirect()->back();
     }

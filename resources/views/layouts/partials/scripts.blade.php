@@ -158,4 +158,9 @@
         document.getElementById("venda03").value = "";
         document.getElementById("venda04").value = "";
     }
+
+    function limparCampos16() {
+        document.getElementById("numero_conversoes").value = "";
+        document.getElementById("numero_visitas").value = "";
+    }
 </script>

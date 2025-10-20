@@ -169,7 +169,7 @@ class MainController
             [
                 "h2" => "Taxa de",
                 "span" => "Conversão",
-                "h5" => "o total"
+                "h5" => "o resultado"
             ]
         );
     }
