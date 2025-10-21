@@ -27,7 +27,7 @@
         @csrf
                     
         <div class="input-group input-group-lg mb-3">
-            <span class="input-group-text"><i class="bi bi-file-earmark-medical me-1"></i>Dado</span>
+            <span class="input-group-text">*** Dado</span>
                         
             <input type="text" id="dado" name="dado" class="form-control text-end" placeholder="..." aria-label="Dado" value="{{ old("dado") }}">
                     
@@ -38,7 +38,7 @@
                 <option value="idade" {{ old("idade") == "Idade" ? "selected" : "" }}>Idade</option>
             </select>
 
-            <span class="input-group-text"><i class="bi bi-percent me-1"></i>Juros</span>
+            <span class="input-group-text"><i class="bi bi-file-earmark-medical me-1"></i>Tipo</span>
         </div>
         
         <div class="d-flex flex-column flex-md-row justify-content-between gap-2">

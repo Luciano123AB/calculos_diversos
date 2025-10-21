@@ -16,8 +16,8 @@ class Impostos
     public static function calcular($valor, $taxa) {
 
         $valor = floatval($valor);
-        $taxa = floatval($taxa);
-        $resultado = $valor * $taxa;
+        $taxa = $valor * ($taxa / 100);
+        $resultado = $valor + $taxa;
 
         return $resultado;
     }

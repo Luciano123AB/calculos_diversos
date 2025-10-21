@@ -70,7 +70,7 @@
                     Pior mês: <span class="fw-bold text-dark">R$ 0,00</span>
                 </h5>
 
-                <h4 class="fw-normal text-secondary">Taxa de crescimento: <span class="fw-bold text-dark">R$ 0,00</span></h4>
+                <h4 class="fw-normal text-secondary">Taxa de crescimento: <span class="fw-bold text-dark">0,00%</span></h4>
             @else
                 <h5 class="fw-normal text-secondary">
                     Total vendido: <span class="fw-bold text-success">R$ {{ session("total") }}</span>
@@ -89,9 +89,9 @@
                 </h5>
 
                 @if(session("taxa") > 0.00)
-                    <h4 class="fw-normal text-secondary">Taxa de crescimento: <span class="fw-bold text-success">R$ {{ session("taxa") }}</span></h4>
+                    <h4 class="fw-normal text-secondary">Taxa de crescimento: <span class="fw-bold text-success">{{ session("taxa") }}%</span></h4>
                 @else
-                    <h4 class="fw-normal text-secondary">Taxa de crescimento: <span class="fw-bold text-danger">R$ {{ session("taxa") }}</span></h4>
+                    <h4 class="fw-normal text-secondary">Taxa de crescimento: <span class="fw-bold text-danger">{{ session("taxa") }}%</span></h4>
                 @endif
                 
                 {{ session()->forget(["total", "media", "melhor", "pior", "taxa"]) }}

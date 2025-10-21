@@ -15,7 +15,7 @@
             
             <input type="number" id="taxa" name="taxa" class="form-control text-end" placeholder="00,0" aria-label="Taxa" value="{{ old("taxa") }}">
             
-            <span class="input-group-text"><i class="bi bi-coin me-1"></i>Taxa</span>
+            <span class="input-group-text"><i class="bi bi-percent me-1"></i>Taxa</span>
         </div>
         
         <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
