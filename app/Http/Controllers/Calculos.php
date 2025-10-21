@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\ConversaoMoeda;
 use App\Services\ConversoresDiversos;
 use App\Services\DescontosCupons;
+use App\Services\DistanciaGeografica;
 use App\Services\Frete;
 use App\Services\GraficosDinamicos;
 use App\Services\Imc;
@@ -586,6 +587,33 @@ class Calculos
         $renda = $request->input("renda");
 
         session(["resultado" => VerificacaoLimitesRegras::calcular($idade, $renda)]);
+
+        return redirect()->back();
+    }
+
+    public function calcularDistanciaGeografica(Request $request) {
+        $request->validate(
+            [
+                "latitude01" => "required",
+                "longitude01" => "required",
+                "latitude02" => "required",
+                "longitude02" => "required"
+            ],
+
+            [
+                "latitude01.required" => "Insira a latitude 1.",
+                "longitude01.required" => "Insira a longitude 1.",
+                "latitude02.required" => "Insira a latitude 2.",
+                "longitude02.required" => "Insira a longitude 2."
+            ]
+        );
+
+        $latitude01 = $request->input("latitude01");
+        $longitude01 = $request->input("longitude01");
+        $latitude02 = $request->input("latitude02");
+        $longitude02 = $request->input("longitude02");
+
+        session(["resultado" => number_format(DistanciaGeografica::calcular($latitude01, $longitude01, $latitude02, $longitude02), 2, ',', '.')]);
 
         return redirect()->back();
     }

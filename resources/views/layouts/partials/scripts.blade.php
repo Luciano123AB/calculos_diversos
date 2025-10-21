@@ -173,4 +173,11 @@
         document.getElementById("idade").value = "";
         document.getElementById("renda").value = "";
     }
+
+    function limparCampos19() {
+        document.getElementById("latitude01").value = "";
+        document.getElementById("longitude01").value = "";
+        document.getElementById("latitude02").value = "";
+        document.getElementById("longitude02").value = "";
+    }
 </script>
