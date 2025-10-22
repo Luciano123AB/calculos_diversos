@@ -99,9 +99,7 @@
                             
                             <div class="d-grid gap-3">
                                 <a href="{{ route('DistanciaGeografica') }}" class="btn btn-outline-info fw-semibold">Distância Geográfica</a>
-                                
-                                <a href="{{ route('TempoExecusaoCronometros') }}" class="btn btn-outline-info fw-semibold">Tempo de Execução / Cronômetros</a>
-                                
+                                                                
                                 <a href="{{ route('Fisicos') }}" class="btn btn-outline-info fw-semibold">Físicos</a>
                                 
                                 <a href="{{ route('AlgoritmosRecomendacaoRanqueamento') }}" class="btn btn-outline-info fw-semibold">Algoritmos de Recomendação / Ranqueamento</a>

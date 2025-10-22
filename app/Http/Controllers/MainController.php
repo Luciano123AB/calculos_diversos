@@ -204,16 +204,6 @@ class MainController
         );
     }
 
-    public function tempoExecusaoCronometros() {
-        return view("tempo_execusao_cronometros")->with("textos",
-            [
-                "h2" => "Tempo de Execução",
-                "span" => "e Cronômetros",
-                "h5" => "o tempo"
-            ]
-        );
-    }
-
     public function fisicos() {
         return view("fisicos")->with("textos",
             [
