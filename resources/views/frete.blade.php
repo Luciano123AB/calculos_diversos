@@ -64,7 +64,7 @@
     <script>
         $(document).ready(function() {
             $("#valor_km").mask("##0.00", { reverse: true });
-            $("#distancia").mask("0000.0");
+            $("#distancia").mask("##0.0", { reverse: true });
         });
     </script>
 @endsection

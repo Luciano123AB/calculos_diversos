@@ -27,7 +27,7 @@
             
             <span class="input-group-text bg-white border-0 border-start fw-bold px-3">÷</span>
             
-            <input type="number" id="numero_meses" name="numero_meses" class="form-control text-end" placeholder="00" aria-label="NumeroMeses" value="{{ old("numero_meses") }}">
+            <input type="number" id="numero_meses" name="numero_meses" class="form-control text-end" placeholder="00" aria-label="NumeroMeses" min="1" value="{{ old("numero_meses") }}">
             
             <span class="input-group-text"><i class="bi bi-calendar2-date me-1"></i>Nº Meses</span>
         </div>
@@ -60,13 +60,21 @@
         
         <div class="mt-4 text-center">
             @if(!session()->has("resultado"))
+                <h5 class="fw-normal text-secondary">Taxa: <span class="fw-bold text-dark">R$ 0,00</span></h5>
+
                 <h4 class="fw-normal text-secondary">Resultado: <span class="fw-bold text-dark">R$ 0,00</span></h4>
             @else
+                @if(session("taxa_parcela"))
+                    <h5 class="fw-normal text-secondary">Taxa: <span class="fw-bold text-success">R$ {{ session("taxa_parcela") }}</span></h5>
+                @else
+                    <h5 class="fw-normal text-secondary">Taxa: <span class="fw-bold text-success">R$ 0.00</span></h5>
+                @endif
+
                 <h4 class="fw-normal text-secondary">
                     Resultado: <span class="fw-bold text-success">R$ {{ session("resultado") }}</span>
                 </h4>
                 
-                {{ session()->forget("resultado") }}
+                {{ session()->forget(["resultado", "taxa_parcela"]) }}
             @endif
         </div>
         

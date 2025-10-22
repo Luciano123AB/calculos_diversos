@@ -3,7 +3,19 @@
 namespace App\Services;
 
 class ParcelamentoJuros
-{
+{   
+    public static function calcularTaxa($valor, $taxa, $numero_meses) {
+        
+        $valor = floatval($valor);
+        $taxa = floatval($taxa) / 100;
+        $numero_meses = intval($numero_meses);
+        $parcela = $valor / $numero_meses;
+        $juros_tatais = $valor * (($taxa) * pow(1 + $taxa, $numero_meses)) / (pow(1 + $taxa, $numero_meses) - 1);
+        $resultado = $juros_tatais - $parcela;
+
+        return $resultado;
+    }
+
     public static function calcular($valor, $taxa, $numero_meses) {
 
         $valor = floatval($valor);
@@ -21,5 +33,5 @@ class ParcelamentoJuros
         }
 
         return $resultado;
-    }
+    }    
 }

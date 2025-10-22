@@ -45,13 +45,17 @@
         
         <div class="mt-4 text-center">
             @if(!session()->has("resultado"))
+                <h5 class="fw-normal text-secondary">Valor de 1: <span class="fw-bold text-dark">R$ 0,00</span></h5>
+
                 <h4 class="fw-normal text-secondary">Resultado: <span class="fw-bold text-dark">$ 0,00</span></h4>
             @else
+                <h5 class="fw-normal text-secondary">Valor de 1: <span class="fw-bold text-success">R$ {{ session("valor_moeda") }}</span></h5>
+
                 <h4 class="fw-normal text-secondary">
                     Resultado: <span class="fw-bold text-success">{{ session("resultado") }}</span>
                 </h4>
                 
-                {{ session()->forget("resultado") }}
+                {{ session()->forget(["resultado", "valor_moeda"]) }}
             @endif
         </div>
         

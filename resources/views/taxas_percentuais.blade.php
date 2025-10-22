@@ -9,7 +9,7 @@
         <div class="input-group input-group-lg mb-3">
             <span class="input-group-text"><i class="bi bi-cash-coin me-1"></i>Valor</span>
             
-            <input type="number" step="0.01" id="valor" name="valor" class="form-control text-end" placeholder="000,00" aria-label="Valor" value="{{ old("valor") }}">
+            <input type="number" step="0.01" id="valor" name="valor" class="form-control text-end" placeholder="0.000,00" aria-label="Valor" value="{{ old("valor") }}">
             
             <span class="input-group-text bg-white border-0 fw-bold px-3">×</span>
             

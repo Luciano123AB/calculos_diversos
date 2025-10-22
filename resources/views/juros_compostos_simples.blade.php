@@ -70,8 +70,12 @@
         
         <div class="mt-4 text-center">
             @if(!session()->has("resultado"))
+                <h5 class="fw-normal text-secondary">Aumento: <span class="fw-bold text-dark">R$ 0,00</span></h5>
+
                 <h4 class="fw-normal text-secondary">Resultado: <span class="fw-bold text-dark">R$ 0,00</span></h4>
             @else
+                <h5 class="fw-normal text-secondary">Aumento: <span class="fw-bold text-success">R$ {{ session("aumento") }}</span></h5>
+
                 <h4 class="fw-normal text-secondary">
                     Resultado: <span class="fw-bold text-success">R$ {{ session("resultado") }}</span>
                 </h4>

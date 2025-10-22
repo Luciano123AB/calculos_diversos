@@ -62,7 +62,12 @@ class Calculos
         $valor = $request->input("valor");
         $desconto = $request->input("desconto");
 
-        session(["resultado" => number_format(DescontosCupons::calcular($valor, $desconto), 2, ",", ".")]);
+        session(
+            [
+                "resultado" => number_format(DescontosCupons::calcular($valor, $desconto), 2, ",", "."),
+                "desconto" => number_format(DescontosCupons::calcularDesconto($valor, $desconto), 2, ",", ".")
+            ]
+        );
 
         return redirect()->back();
     }
@@ -131,7 +136,16 @@ class Calculos
             return redirect()->back()->withInput()->with("taxa", "Insira a taxa.");
         }
 
-        session(["resultado" => number_format(ParcelamentoJuros::calcular($valor, $taxa, $numero_meses), 2, ",", ".")]);
+        if ($taxa == 0.0) {
+            session(["resultado" => number_format(ParcelamentoJuros::calcular($valor, $taxa, $numero_meses), 2, ",", ".")]);
+        } else {
+            session(
+                [
+                    "resultado" => number_format(ParcelamentoJuros::calcular($valor, $taxa, $numero_meses), 2, ",", "."),
+                    "taxa_parcela" => number_format(ParcelamentoJuros::calcularTaxa($valor, $taxa, $numero_meses), 2, ",", ".")
+                ]
+            );
+        }        
 
         return redirect()->back();
     }
@@ -157,23 +171,38 @@ class Calculos
         $simbolo = "";
 
         if ($moeda == "Dólar") {
+
             $simbolo = "$";
+
+            session(["valor_moeda" => "5,40"]);
         }
 
         if ($moeda == "Euro") {
+
             $simbolo = "€";
+
+            session(["valor_moeda" => "6,27"]);
         }
 
         if ($moeda == "Libra") {
+            
             $simbolo = "£";
+
+            session(["valor_moeda" => "7.18"]);
         }
 
         if ($moeda == "Iene") {
+
             $simbolo = "¥";
+
+            session(["valor_moeda" => "0.40"]);
         }
 
         if ($moeda == "Fraco") {
+
             $simbolo = "Fr";
+
+            session(["valor_moeda" => "6.91"]);
         }
         
         session(["resultado" => "$simbolo " . number_format(ConversaoMoeda::calcular($valor, $moeda), 2, ",", ".")]);
@@ -207,7 +236,12 @@ class Calculos
             return redirect()->back()->withInput()->with("juros", "Selecione o tipo de juros.");
         }
         
-        session(["resultado" => number_format(JurosCompostosSimples::calcular($valor, $juros, $taxa, $tempo), 2, ",", ".")]);
+        session(
+            [
+                "resultado" => number_format(JurosCompostosSimples::calcular($valor, $juros, $taxa, $tempo), 2, ",", "."),
+                "aumento" => number_format(JurosCompostosSimples::calcularAumento($valor, $juros, $taxa, $tempo), 2, ",", ".")
+            ]
+        );
 
         return redirect()->back();
     }

@@ -205,6 +205,8 @@
                     
                 {{ session()->forget("resultado_percentual") }}
             @else
+                <h5 class="fw-normal text-secondary">Situação: <span class="fw-bold text-dark">...</span></h5>
+
                 <h4 class="fw-normal text-secondary">Resultado: <span class="fw-bold text-dark">0.0</span></h4>
             @endif
         </div>
