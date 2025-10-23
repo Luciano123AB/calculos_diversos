@@ -6,6 +6,7 @@ use App\Services\ConversaoMoeda;
 use App\Services\ConversoresDiversos;
 use App\Services\DescontosCupons;
 use App\Services\DistanciaGeografica;
+use App\Services\Fisicos;
 use App\Services\Frete;
 use App\Services\GraficosDinamicos;
 use App\Services\Imc;
@@ -648,6 +649,64 @@ class Calculos
         $longitude02 = $request->input("longitude02");
 
         session(["resultado" => number_format(DistanciaGeografica::calcular($latitude01, $longitude01, $latitude02, $longitude02), 2, ',', '.')]);
+
+        return redirect()->back();
+    }
+
+    public function calcularFisicos(Request $request) {
+
+        $consumo = $request->boolean("consumo");
+        $eficiencia = $request->boolean("eficiencia");
+        $quantidade = $request->input("quantidade");
+        $tempo = $request->input("tempo");
+        $distancia = $request->input("distancia");
+        $litros = $request->input("litros");
+
+        if (!$consumo && !$eficiencia) {
+            return redirect()->back()->withInput()->with("escolha", "Escolha um cálculo.");
+        } else if ($consumo) {
+            
+            $errors = [];
+
+            if ($quantidade === "" || $quantidade === null) {
+                
+                $errors["quantidade"] = "Insira a quantidade.";
+            
+            }
+
+            if ($tempo === "" || $tempo === null) {
+                
+                $errors["tempo"] = "Insira o tempo.";
+                
+            }
+
+            if (!empty($errors)) {
+                return redirect()->back()->withErrors($errors);                
+            }
+
+            session(["consumo" => Fisicos::calcularConsumo($quantidade, $tempo)]);
+        } else if ($eficiencia) {
+            
+            $errors = [];
+
+            if ($distancia === "" || $distancia === null) {
+                
+                $errors["distancia"] = "Insira a distância.";
+
+            }
+            
+            if ($litros === "" || $distancia === null) {
+                
+                $errors["litros"] = "Insira os litros.";
+
+            }
+
+            if (!empty($errors)) {
+                return redirect()->back()->withErrors($errors);
+            }
+
+            session(["eficiencia" => number_format(Fisicos::calcularEficiencia($distancia, $litros), 2, ",", ".")]);
+        }
 
         return redirect()->back();
     }

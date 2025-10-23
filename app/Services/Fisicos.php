@@ -4,9 +4,16 @@ namespace App\Services;
 
 class Fisicos
 {
-    public static function calcular($valor01, $valor02) {
+    public static function calcularConsumo($quantidade, $tempo) {
 
-        $resultado = "";
+        $resultado = $quantidade / $tempo;
+
+        return $resultado;
+    }
+
+    public static function calcularEficiencia($distancia, $tempo) {
+
+        $resultado = $distancia / $tempo;
 
         return $resultado;
     }

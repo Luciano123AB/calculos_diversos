@@ -64,9 +64,6 @@ Route::prefix('/')->group(function () {
     Route::get('distancia_geografica', [MainController::class, "distanciaGeografica"])->name("DistanciaGeografica");
     Route::post('calcular_distancia_geografica', [Calculos::class, "calcularDistanciaGeografica"])->name("CalcularDistanciaGeografica");
 
-    Route::get('tempo_execusao_cronometros', [MainController::class, "tempoExecusaoCronometros"])->name("TempoExecusaoCronometros");
-    Route::post('calcular_tempo_execusao_cronometros', [Calculos::class, "calcularTempoExecusaoCronometros"])->name("CalcularTempoExecusaoCronometros");
-
     Route::get('fisicos', [MainController::class, "fisicos"])->name("Fisicos");
     Route::post('calcular_fisicos', [Calculos::class, "calcularFisicos"])->name("CalcularFisicos");
 

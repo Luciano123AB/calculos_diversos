@@ -180,4 +180,11 @@
         document.getElementById("latitude02").value = "";
         document.getElementById("longitude02").value = "";
     }
+
+    function limparCampos20() {
+        document.getElementById("quantidade").value = "";
+        document.getElementById("tempo").value = "";
+        document.getElementById("distancia").value = "";
+        document.getElementById("litros").value = "";
+    }
 </script>
