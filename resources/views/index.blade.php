@@ -101,8 +101,6 @@
                                 <a href="{{ route('DistanciaGeografica') }}" class="btn btn-outline-info fw-semibold">Distância Geográfica</a>
                                                                 
                                 <a href="{{ route('Fisicos') }}" class="btn btn-outline-info fw-semibold">Físicos</a>
-                                
-                                <a href="{{ route('AlgoritmosRecomendacaoRanqueamento') }}" class="btn btn-outline-info fw-semibold">Algoritmos de Recomendação / Ranqueamento</a>
                             </div>
                         </div>
                     </div>
