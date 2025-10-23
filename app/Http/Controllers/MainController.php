@@ -213,14 +213,4 @@ class MainController
             ]
         );
     }
-
-    public function algoritmosRecomendacaoRanqueamento() {
-        return view("algoritmos_recomendacao_ranqueamento")->with("textos",
-            [
-                "h2" => "Algoritmos de Recomendação",
-                "span" => "e Ranqueamento",
-                "h5" => "o resultado"
-            ]
-        );
-    }
 }

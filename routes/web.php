@@ -66,7 +66,4 @@ Route::prefix('/')->group(function () {
 
     Route::get('fisicos', [MainController::class, "fisicos"])->name("Fisicos");
     Route::post('calcular_fisicos', [Calculos::class, "calcularFisicos"])->name("CalcularFisicos");
-
-    Route::get('algoritmos_recomendacao_ranqueamento', [MainController::class, "algoritmosRecomendacaoRanqueamento"])->name("AlgoritmosRecomendacaoRanqueamento");
-    Route::post('calcular_algoritmos_recomendacao_ranqueamento', [Calculos::class, "calcularAlgoritmosRecomendacaoRanqueamento"])->name("CalcularAlgoritmosRecomendacaoRanqueamento");
 });
