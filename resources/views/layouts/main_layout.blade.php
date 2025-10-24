@@ -12,12 +12,6 @@
 <body class="bg-primary text-center fst-italic">
     @yield("content")
 
-    <footer class="mt-5 mb-2">
-        <img src="{{ asset("assets/images/foto_proprietario.png") }}" style="width: 35px; height: 35px;" class="border border-black shadow"> 
-        
-        Todos os Direitos Reservados: Luciano Eduardo Stefanello da Silva - 2025
-    </footer>
-
     @include("layouts.partials.scripts")
 </body>
 </html>
