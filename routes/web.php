@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix("/")->group(function () {
     Route::controller(MainController::class)->group(function() {
-        Route::get("", "index")->name("index");
+        Route::get("", "index")->name("home");
 
         Route::get("subtotal_total_compras", "subtotalTotalCompras")->name("SubtotalTotalCompras");
 
