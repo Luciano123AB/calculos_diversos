@@ -36,12 +36,10 @@ class Validacao
         $digito2 = $resto2 < 2 ? 0 : 11 - $resto2;
 
         if ($dado_array[9] == $digito1 && $dado_array[10] == $digito2) {
-
             $resultado = "CPF Válido";
 
             return $resultado;
         } else {
-
             $resultado = "CPF Inválido";
 
             return $resultado;

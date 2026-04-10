@@ -16,7 +16,6 @@ class DistanciaGeografica
         
         $a = sin($deltaLatitude / 2) ** 2 +
             cos($latitude01) * cos($latitude02) * sin($deltaLongitude / 2) ** 2;
-
         $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
         $resultado = $raio_terra * $c;
 

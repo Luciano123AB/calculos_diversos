@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\Boot;
+use Illuminate\View\View;
 
 class MainController
 {

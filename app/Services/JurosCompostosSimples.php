@@ -12,17 +12,13 @@ class JurosCompostosSimples
         $resultado = 0.0;
         
         if ($juros == "Composto") {
-
             $aumento = $valor * pow((1 + $taxa), $tempo);
             $resultado = $aumento - $valor;
-
         }
 
         if ($juros == "Simples") {
-
             $aumento = $valor + ($valor * $taxa * $tempo);
             $resultado = $aumento - $valor;
-
         }
 
         return $resultado;

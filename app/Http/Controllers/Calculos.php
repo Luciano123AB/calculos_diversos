@@ -22,11 +22,12 @@ use App\Services\TaxaConversao;
 use App\Services\TaxasPercentuais;
 use App\Services\Validacao;
 use App\Services\VerificacaoLimitesRegras;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class Calculos
 {
-    public function calcularSubtotalTotalCompras(Request $request) {
+    public function calcularSubtotalTotalCompras(Request $request): RedirectResponse {
         $request->validate(
             [
                 "valor" => "required",
@@ -39,15 +40,12 @@ class Calculos
             ]
         );
         
-        $valor = $request->input("valor");
-        $quantidade = $request->input("quantidade");
-        
-        session(["resultado" => number_format(SubtotalTotalCompras::calcular($valor, $quantidade), 2, ",", ".")]);
+        session()->flash("resultado", number_format(SubtotalTotalCompras::calcular($request->input("valor"), $request->input("quantidade")), 2, ",", "."));
 
         return redirect()->back();
     }
 
-    public function calcularDescontosCupons(Request $request) {
+    public function calcularDescontosCupons(Request $request): RedirectResponse {
         $request->validate(
             [
                 "valor" => "required",
@@ -63,7 +61,7 @@ class Calculos
         $valor = $request->input("valor");
         $desconto = $request->input("desconto");
 
-        session(
+        session()->flash(
             [
                 "resultado" => number_format(DescontosCupons::calcular($valor, $desconto), 2, ",", "."),
                 "desconto" => number_format(DescontosCupons::calcularDesconto($valor, $desconto), 2, ",", ".")
@@ -73,7 +71,7 @@ class Calculos
         return redirect()->back();
     }
 
-    public function calcularFrete(Request $request) {
+    public function calcularFrete(Request $request): RedirectResponse {
         $request->validate(
             [
                 "valor_km" => "required",
@@ -85,16 +83,13 @@ class Calculos
                 "distancia.required" => "Insira a distância."
             ]
         );
-        
-        $valor_km = $request->input("valor_km");
-        $distancia = $request->input("distancia");
 
-        session(["resultado" => number_format(Frete::calcular($valor_km, $distancia), 2, ",", ".")]);
+        session()->flash("resultado", number_format(Frete::calcular($request->input("valor_km"), $request->input("distancia")), 2, ",", "."));
 
         return redirect()->back();
     }
 
-    public function calcularImpostos(Request $request) {
+    public function calcularImpostos(Request $request): RedirectResponse {
         $request->validate(
             [
                 "valor" => "required",
@@ -110,13 +105,15 @@ class Calculos
         $valor = $request->input("valor");
         $taxa = $request->input("taxa");
 
-        session(["imposto" => number_format(Impostos::calcularImposto($valor, $taxa), 2, ",", ".")]);
-        session(["resultado" => number_format(Impostos::calcular($valor, $taxa), 2, ",", ".")]);
+        session()->flash([
+            "imposto" => number_format(Impostos::calcularImposto($valor, $taxa), 2, ",", "."),
+            "resultado" => number_format(Impostos::calcular($valor, $taxa), 2, ",", ".")
+        ]);
 
         return redirect()->back();
     }
 
-    public function calcularParcelamentoJuros(Request $request) {
+    public function calcularParcelamentoJuros(Request $request): RedirectResponse {
         $request->validate(
             [
                 "valor" => "required",
@@ -138,9 +135,9 @@ class Calculos
         }
 
         if ($taxa == 0.0) {
-            session(["resultado" => number_format(ParcelamentoJuros::calcular($valor, $taxa, $numero_meses), 2, ",", ".")]);
+            session()->flash("resultado", number_format(ParcelamentoJuros::calcular($valor, $taxa, $numero_meses), 2, ",", "."));
         } else {
-            session(
+            session()->flash(
                 [
                     "resultado" => number_format(ParcelamentoJuros::calcular($valor, $taxa, $numero_meses), 2, ",", "."),
                     "taxa_parcela" => number_format(ParcelamentoJuros::calcularTaxa($valor, $taxa, $numero_meses), 2, ",", ".")
@@ -151,7 +148,7 @@ class Calculos
         return redirect()->back();
     }
 
-    public function calcularConversaoMoeda(Request $request) {
+    public function calcularConversaoMoeda(Request $request): RedirectResponse {
         $request->validate(
             [
                 "valor" => "required"
@@ -162,7 +159,6 @@ class Calculos
             ]
         );
         
-        $valor = $request->input("valor");
         $moeda = $request->input("moeda");
 
         if ($moeda == "Selecione a moeda") {
@@ -172,46 +168,41 @@ class Calculos
         $simbolo = "";
 
         if ($moeda == "Dólar") {
-
             $simbolo = "$";
 
-            session(["valor_moeda" => "5,40"]);
+            session()->flash("valor_moeda", "5,40");
         }
 
         if ($moeda == "Euro") {
-
             $simbolo = "€";
 
-            session(["valor_moeda" => "6,27"]);
+            session()->flash("valor_moeda", "6,27");
         }
 
-        if ($moeda == "Libra") {
-            
+        if ($moeda == "Libra") {            
             $simbolo = "£";
 
-            session(["valor_moeda" => "7.18"]);
+            session()->flash("valor_moeda", "7.18");
         }
 
         if ($moeda == "Iene") {
-
             $simbolo = "¥";
 
-            session(["valor_moeda" => "0.40"]);
+            session()->flash("valor_moeda", "0.40");
         }
 
         if ($moeda == "Fraco") {
-
             $simbolo = "Fr";
 
-            session(["valor_moeda" => "6.91"]);
+            session()->flash("valor_moeda", "6.91");
         }
         
-        session(["resultado" => "$simbolo " . number_format(ConversaoMoeda::calcular($valor, $moeda), 2, ",", ".")]);
+        session()->flash("resultado", "$simbolo " . number_format(ConversaoMoeda::calcular($request->input("valor"), $moeda), 2, ",", "."));
 
         return redirect()->back();
     }
 
-    public function calcularJurosCompostosSimples(Request $request) {
+    public function calcularJurosCompostosSimples(Request $request): RedirectResponse {
         $request->validate(
             [
                 "valor" => "required",
@@ -237,7 +228,7 @@ class Calculos
             return redirect()->back()->withInput()->with("juros", "Selecione o tipo de juros.");
         }
         
-        session(
+        session()->flash(
             [
                 "resultado" => number_format(JurosCompostosSimples::calcular($valor, $juros, $taxa, $tempo), 2, ",", "."),
                 "aumento" => number_format(JurosCompostosSimples::calcularAumento($valor, $juros, $taxa, $tempo), 2, ",", ".")
@@ -247,7 +238,7 @@ class Calculos
         return redirect()->back();
     }
 
-    public function calcularTaxasPercentuais(Request $request) {
+    public function calcularTaxasPercentuais(Request $request): RedirectResponse {
         $request->validate(
             [
                 "valor" => "required",
@@ -259,16 +250,13 @@ class Calculos
                 "taxa.required" => "Insira a taxa."
             ]
         );
-
-        $valor = $request->input("valor");
-        $taxa = $request->input("taxa");
         
-        session(["resultado" => number_format(TaxasPercentuais::calcular($valor, $taxa), 2, ",", ".")]);
+        session()->flash("resultado", number_format(TaxasPercentuais::calcular($request->input("valor"), $request->input("taxa")), 2, ",", "."));
 
         return redirect()->back();
     }
 
-    public function calcularPrevisaoGanhosPerdas(Request $request) {
+    public function calcularPrevisaoGanhosPerdas(Request $request): RedirectResponse {
         $request->validate(
             [
                 "receita" => "required",
@@ -280,16 +268,13 @@ class Calculos
                 "despesa.required" => "Insira a despesa."
             ]
         );
-
-        $receita = $request->input("receita");
-        $despesa = $request->input("despesa");
         
-        session(["resultado" => number_format(PrevisaGanhosPerdas::calcular($receita, $despesa), 2, ",", ".")]);
+        session()->flash("resultado", number_format(PrevisaGanhosPerdas::calcular($request->input("receita"), $request->input("despesa")), 2, ",", "."));
 
         return redirect()->back();
     }
 
-    public function calcularValidacao(Request $request) {
+    public function calcularValidacao(Request $request): RedirectResponse {
 
         $tipo = $request->input("dados");
 
@@ -315,7 +300,7 @@ class Calculos
                     return redirect()->back()->withInput()->withErrors(["dado" => "O CPF deve ter 14 dígitos."]);
                 }
 
-                session(["resultado" => Validacao::validarCpf($dado)]);
+                session()->flash("resultado", Validacao::validarCpf($dado));
             break;
 
             case "cnpj":
@@ -323,18 +308,18 @@ class Calculos
                     return redirect()->back()->withInput()->withErrors(["dado" => "O CNPJ deve ter 18 dígitos."]);
                 }
 
-                session(["resultado" => Validacao::validarCnpj($dado)]);
+                session()->flash("resultado", Validacao::validarCnpj($dado));
             break;
 
             case "idade":
-                session(["resultado" => Validacao::validarIdade($dado)]);
+                session()->flash("resultado", Validacao::validarIdade($dado));
             break;
         }
 
         return redirect()->back();
     }
 
-    public function calcularImc(Request $request) {
+    public function calcularImc(Request $request): RedirectResponse {
         $request->validate(
             [
                 "peso" => "required",
@@ -350,13 +335,15 @@ class Calculos
         $peso = $request->input("peso");
         $altura = $request->input("altura");
         
-        session(["resultado" => number_format(Imc::calcular($peso, $altura), 2, ".")]);
-        session(["classificacao" => Imc::classificar(number_format(Imc::calcular($peso, $altura), 2, "."))]);
+        session()->flash([
+            "resultado" => number_format(Imc::calcular($peso, $altura), 2, "."),
+            "classificacao" => Imc::classificar(number_format(Imc::calcular($peso, $altura), 2, "."))
+        ]);
 
         return redirect()->back();
     }
 
-    public function calcularConversoresDiversos(Request $request) {
+    public function calcularConversoresDiversos(Request $request): RedirectResponse {
 
         $escolha = $request->input("escolha");
 
@@ -378,37 +365,33 @@ class Calculos
         $simbolo = "";
 
         if ($escolha == "Celsius") {
-
             $simbolo = "°C";
 
-            session(["resultado" => number_format(ConversoresDiversos::calcular($valor, $escolha), 1, ",") . " $simbolo"]);
+            session()->flash("resultado", number_format(ConversoresDiversos::calcular($valor, $escolha), 1, ",") . " $simbolo");
         }
 
-        if ($escolha == "Fahrenheit") {
-            
+        if ($escolha == "Fahrenheit") {            
             $simbolo = "°F";
 
-            session(["resultado" => number_format(ConversoresDiversos::calcular($valor, $escolha), 1, ",") . " $simbolo"]);
+            session()->flash("resultado", number_format(ConversoresDiversos::calcular($valor, $escolha), 1, ",") . " $simbolo");
         }
 
         if ($escolha == "Quilômetros") {
-
             $simbolo = "Km";
 
-            session(["resultado" => number_format(ConversoresDiversos::calcular($valor, $escolha), 1, ",") . " $simbolo"]);
+            session()->flash("resultado", number_format(ConversoresDiversos::calcular($valor, $escolha), 1, ",") . " $simbolo");
         }
 
         if ($escolha == "Milhas") {
-
             $simbolo = "milhas";
 
-            session(["resultado" => ConversoresDiversos::calcular($valor, $escolha) . " $simbolo"]);
+            session()->flash("resultado", ConversoresDiversos::calcular($valor, $escolha) . " $simbolo");
         }        
 
         return redirect()->back();
     }
 
-    public function calcularMediasSomasMedianasPercentuais(Request $request) {
+    public function calcularMediasSomasMedianasPercentuais(Request $request): RedirectResponse {
 
         $media = $request->boolean("media");
         $mediana = $request->boolean("mediana");
@@ -420,83 +403,81 @@ class Calculos
         $numero02 = $request->input("numero02");
         $numero03 = $request->input("numero03");
         $numero04 = $request->input("numero04");
-        $quantidade = $request->input("quantidade");
-        $total = $request->input("total");
 
         if (!$media && !$mediana && !$percentual) {
             return redirect()->back()->withInput()->with("escolha", "Escolha um cálculo.");
-        } else {
-            if ($media) {
-    
-                $errors = [];
-    
-                if ($nota01 === "" || $nota01 === null) {
-                    $errors['nota01'] = "Insira a nota 1.";
-                }
-    
-                if ($nota02 === "" || $nota02 === null) {
-                    $errors['nota02'] = "Insira a nota 2.";
-                }
-    
-                if ($nota03 === "" || $nota03 === null) {
-                    $errors['nota03'] = "Insira a nota 3.";
-                }
-    
-                if (!empty($errors)) {
-                    return redirect()->back()->withInput()->withErrors($errors);
-                }
-    
-                session(["resultado_media" => number_format(MediasSomasMedianasPercentuais::calcularMedia($nota01, $nota02, $nota03), 1, ".")]);
-    
-                return redirect()->back();
-            } else if ($mediana) {
-
-                $errors = [];
-    
-                if ($numero01 === "" || $numero01 === null) {
-                    $errors['numero01'] = "Insira a número 1.";
-                }
-    
-                if ($numero02 === "" || $numero02 === null) {
-                    $errors['numero02'] = "Insira a número 2.";
-                }
-    
-                if ($numero03 === "" || $numero03 === null) {
-                    $errors['numero03'] = "Insira a número 3.";
-                }
-
-                if ($numero04 === "" || $numero04 === null) {
-                    $errors['numero03'] = "Insira a número 3.";
-                }
-    
-                if (!empty($errors)) {
-                    return redirect()->back()->withInput()->withErrors($errors);
-                }
-    
-                session(["resultado_mediana" => number_format(MediasSomasMedianasPercentuais::calcularMediana($numero01, $numero02, $numero03, $numero04), 1, ",")]);
-    
-                return redirect()->back();
-            } else if ($percentual) {
-                $request->validate(
-                    [
-                        "quantidade" => "required",
-                        "total" => "required"
-                    ],
-    
-                    [
-                        "quantidade.required" => "Insira a quantidade.",
-                        "total.required" => "Insira o total."
-                    ]
-                );
-    
-                session(["resultado_percentual" => number_format(MediasSomasMedianasPercentuais::calcularPercentual($quantidade, $total), 2, ",")]);
-    
-                return redirect()->back();
-            }
         }
+
+        if ($media) {
+
+            $errors = [];
+
+            if ($nota01 === "" || $nota01 === null) {
+                $errors["nota01"] = "Insira a nota 1.";
+            }
+
+            if ($nota02 === "" || $nota02 === null) {
+                $errors["nota02"] = "Insira a nota 2.";
+            }
+
+            if ($nota03 === "" || $nota03 === null) {
+                $errors["nota03"] = "Insira a nota 3.";
+            }
+
+            if (!empty($errors)) {
+                return redirect()->back()->withInput()->withErrors($errors);
+            }
+
+            session()->flash("resultado_media", number_format(MediasSomasMedianasPercentuais::calcularMedia($nota01, $nota02, $nota03), 1, "."));
+
+            return redirect()->back();
+        } else if ($mediana) {
+
+            $errors = [];
+
+            if ($numero01 === "" || $numero01 === null) {
+                $errors["numero01"] = "Insira a número 1.";
+            }
+
+            if ($numero02 === "" || $numero02 === null) {
+                $errors["numero02"] = "Insira a número 2.";
+            }
+
+            if ($numero03 === "" || $numero03 === null) {
+                $errors["numero03"] = "Insira a número 3.";
+            }
+
+            if ($numero04 === "" || $numero04 === null) {
+                $errors["numero03"] = "Insira a número 3.";
+            }
+
+            if (!empty($errors)) {
+                return redirect()->back()->withInput()->withErrors($errors);
+            }
+
+            session()->flash("resultado_mediana", number_format(MediasSomasMedianasPercentuais::calcularMediana($numero01, $numero02, $numero03, $numero04), 1, ","));
+
+            return redirect()->back();
+        }
+        
+        $request->validate(
+            [
+                "quantidade" => "required",
+                "total" => "required"
+            ],
+
+            [
+                "quantidade.required" => "Insira a quantidade.",
+                "total.required" => "Insira o total."
+            ]
+        );
+
+        session()->flash("resultado_percentual", number_format(MediasSomasMedianasPercentuais::calcularPercentual($request->input("quantidade"), $request->input("total")), 2, ","));
+
+        return redirect()->back();
     }
 
-    public function exibirGraficosDinamicos(Request $request) {
+    public function exibirGraficosDinamicos(Request $request): RedirectResponse {
         $request->validate(
             [
                 "permitidos" => "required",
@@ -512,7 +493,7 @@ class Calculos
         $permitidos = $request->input("permitidos");
         $negados = $request->input("negados");
 
-        session(
+        session()->flash(
             [
                 "permitidos" => $permitidos,
                 "negados" => $negados,
@@ -523,7 +504,7 @@ class Calculos
         return redirect()->back();
     }
 
-    public function calcularRelatoriosDesempenho(Request $request) {
+    public function calcularRelatoriosDesempenho(Request $request): RedirectResponse {
         $request->validate(
             [
                 "venda01" => "required",
@@ -545,7 +526,7 @@ class Calculos
         $venda03 = $request->input("venda03");
         $venda04 = $request->input("venda04");
 
-        session(
+        session()->flash(
             [
                 "total" => number_format(RelatoriosDesempenho::calcularTotal($venda01, $venda02, $venda03, $venda04), 2, ","),
                 "media" => number_format(RelatoriosDesempenho::calcularMedia($venda01, $venda02, $venda03, $venda04), 2, ","),
@@ -558,7 +539,7 @@ class Calculos
         return redirect()->back();
     }
 
-    public function calcularTaxaConversao(Request $request) {
+    public function calcularTaxaConversao(Request $request): RedirectResponse {
         $request->validate(
             [
                 "numero_conversoes" => "required",
@@ -571,15 +552,12 @@ class Calculos
             ]
         );
 
-        $numero_conversoes = $request->input("numero_conversoes");
-        $numero_visitas = $request->input("numero_visitas");
-
-        session(["resultado" => number_format(TaxaConversao::calcular($numero_conversoes, $numero_visitas), 2, ",")]);
+        session()->flash("resultado", number_format(TaxaConversao::calcular($request->input("numero_conversoes"), $request->input("numero_visitas")), 2, ","));
 
         return redirect()->back();
     }
 
-    public function calcularPontuacoes(Request $request) {
+    public function calcularPontuacoes(Request $request): RedirectResponse {
         $request->validate(
             [
                 "acertos" => "required",
@@ -592,20 +570,17 @@ class Calculos
             ]
         );
 
-        $acertos = $request->input("acertos");
-        $total_questoes = $request->input("total_questoes");
-
-        session(
+        session()->flash(
             [
-                "pontos" => number_format(Pontuacoes::calcularPontos($acertos), 1, ","),
-                "total" => number_format(Pontuacoes::calcularTotal($total_questoes), 1, ",")
+                "pontos" => number_format(Pontuacoes::calcularPontos($request->input("acertos")), 1, ","),
+                "total" => number_format(Pontuacoes::calcularTotal($request->input("total_questoes")), 1, ",")
             ]
         );
 
         return redirect()->back();
     }
 
-    public function calcularVerificacaoLimitesRegras(Request $request) {
+    public function calcularVerificacaoLimitesRegras(Request $request): RedirectResponse {
         $request->validate(
             [
                 "idade" => "required",
@@ -618,15 +593,12 @@ class Calculos
             ]
         );
 
-        $idade = $request->input("idade");
-        $renda = $request->input("renda");
-
-        session(["resultado" => VerificacaoLimitesRegras::calcular($idade, $renda)]);
+        session()->flash("resultado", VerificacaoLimitesRegras::calcular($request->input("idade"), $request->input("renda")));
 
         return redirect()->back();
     }
 
-    public function calcularDistanciaGeografica(Request $request) {
+    public function calcularDistanciaGeografica(Request $request): RedirectResponse {
         $request->validate(
             [
                 "latitude01" => "required",
@@ -643,17 +615,12 @@ class Calculos
             ]
         );
 
-        $latitude01 = $request->input("latitude01");
-        $longitude01 = $request->input("longitude01");
-        $latitude02 = $request->input("latitude02");
-        $longitude02 = $request->input("longitude02");
-
-        session(["resultado" => number_format(DistanciaGeografica::calcular($latitude01, $longitude01, $latitude02, $longitude02), 2, ',', '.')]);
+        session()->flash("resultado", number_format(DistanciaGeografica::calcular($request->input("latitude01"), $request->input("longitude01"), $request->input("latitude02"), $request->input("longitude02")), 2, ",", "."));
 
         return redirect()->back();
     }
 
-    public function calcularFisicos(Request $request) {
+    public function calcularFisicos(Request $request): RedirectResponse {
 
         $consumo = $request->boolean("consumo");
         $eficiencia = $request->boolean("eficiencia");
@@ -668,44 +635,36 @@ class Calculos
             
             $errors = [];
 
-            if ($quantidade === "" || $quantidade === null) {
-                
-                $errors["quantidade"] = "Insira a quantidade.";
-            
+            if ($quantidade === "" || $quantidade === null) {                
+                $errors["quantidade"] = "Insira a quantidade.";            
             }
 
-            if ($tempo === "" || $tempo === null) {
-                
-                $errors["tempo"] = "Insira o tempo.";
-                
+            if ($tempo === "" || $tempo === null) {                
+                $errors["tempo"] = "Insira o tempo.";                
             }
 
             if (!empty($errors)) {
                 return redirect()->back()->withErrors($errors);                
             }
 
-            session(["consumo" => Fisicos::calcularConsumo($quantidade, $tempo)]);
+            session()->flash("consumo", Fisicos::calcularConsumo($quantidade, $tempo));
         } else if ($eficiencia) {
             
             $errors = [];
 
-            if ($distancia === "" || $distancia === null) {
-                
+            if ($distancia === "" || $distancia === null) {                
                 $errors["distancia"] = "Insira a distância.";
-
             }
             
-            if ($litros === "" || $distancia === null) {
-                
+            if ($litros === "" || $distancia === null) {                
                 $errors["litros"] = "Insira os litros.";
-
             }
 
             if (!empty($errors)) {
                 return redirect()->back()->withErrors($errors);
             }
 
-            session(["eficiencia" => number_format(Fisicos::calcularEficiencia($distancia, $litros), 2, ",", ".")]);
+            session()->flash("eficiencia", number_format(Fisicos::calcularEficiencia($distancia, $litros), 2, ",", "."));
         }
 
         return redirect()->back();

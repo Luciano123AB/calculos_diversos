@@ -1,7 +1,7 @@
 @extends("layouts.main_layout")
 
 @section("content")
-    <nav class="bg-secondary text-center py-5 shadow">
+    <nav class="bg-secondary border-bottom text-center py-5 shadow">
         <h2 class="text-light mb-3">Seja Bem-Vindo ao</h2>
 
         <span class="text-white fw-bold display-5">Cálculos Diversos</span>
