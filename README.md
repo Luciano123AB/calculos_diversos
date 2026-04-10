@@ -1,5 +1,5 @@
 ![Laravel](https://img.shields.io/badge/Laravel-12-red)
-![PHP](https://img.shields.io/badge/PHP-8.3-blue)
+![PHP](https://img.shields.io/badge/PHP-8.5-blue)
 
 # 🔢 Cálculos Diversos (Laravel)
 
@@ -36,7 +36,7 @@ Aplicação web para cálculos com **Laravel**.
 
 ## 🧱 Stack
 
-- **Backend:** PHP 8.3.30 + Laravel 12
+- **Backend:** PHP 8.5.3 + Laravel 12
 - **Frontend build:** Vite + CSS/JS
 - **Containerização:** Docker
 
@@ -65,7 +65,7 @@ routes/
 
 ## ✅ Pré-Requisitos
 
-- PHP 8.3-
+- PHP 8.5+
 - Composer 2+
 - Node.js 20+
 
