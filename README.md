@@ -40,6 +40,8 @@ Aplicação web para cálculos com **Laravel**, com foco em:
 
 - **Backend:** PHP 8.5.3 + Laravel 12
 - **Frontend build:** Vite + CSS/JS
+- Banco de dados: MySQL 8
+- Testes: Não
 - **Containerização:** Docker
 
 ---
