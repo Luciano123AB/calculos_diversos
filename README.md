@@ -40,8 +40,8 @@ Aplicação web para cálculos com **Laravel**, com foco em:
 
 - **Backend:** PHP 8.5.3 + Laravel 12
 - **Frontend build:** Vite + CSS/JS
-- Banco de dados: MySQL 8
-- Testes: Não
+- **Banco de dados:** MySQL 8
+- **Testes:** Não
 - **Containerização:** Docker
 
 ---
@@ -125,10 +125,11 @@ composer run dev
 Ajuste pelo menos:
 
 - `APP_NAME`, `APP_ENV`, `APP_KEY`, `APP_DEBUG`, `APP_URL`
-- `LOG_CHANNEL`, `LOG_LEVEL`
-- `SESSION_DRIVER`, `SESSION_HTTP_ONLY`, `SESSION_SECURE_COOKIE`
 - `CACHE_STORE`
+- `DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`
+- `LOG_CHANNEL`, `LOG_LEVEL`
 - `QUEUE_CONNECTION`
+- `SESSION_DRIVER`, `SESSION_HTTP_ONLY`, `SESSION_SECURE_COOKIE`
 
 ---
 
