@@ -1,7 +1,7 @@
 ![Laravel](https://img.shields.io/badge/Laravel-12-red)
 ![PHP](https://img.shields.io/badge/PHP-8.5-blue)
 
-# 🔢 Cálculos Diversos (Laravel)
+# 🔢 Cálculos Diversos
 
 ## 📜 Sobre
 
@@ -126,7 +126,6 @@ Ajuste pelo menos:
 
 - `APP_NAME`, `APP_ENV`, `APP_KEY`, `APP_DEBUG`, `APP_URL`
 - `CACHE_STORE`
-- `DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`
 - `LOG_CHANNEL`, `LOG_LEVEL`
 - `QUEUE_CONNECTION`
 - `SESSION_DRIVER`, `SESSION_HTTP_ONLY`, `SESSION_SECURE_COOKIE`
@@ -147,7 +146,7 @@ docker run -p 8080:8080 --env-file .env calculos-diversos
 Comando de start definido no container:
 
 ```bash
-php artisan optimize && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
+php artisan migrate --force && php artisan optimize && php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
 ```
 
 ---
