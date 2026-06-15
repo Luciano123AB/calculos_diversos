@@ -5,7 +5,9 @@
 
 ## 📜 Sobre
 
-Aplicação web para cálculos com **Laravel**.
+Aplicação web para cálculos com **Laravel**, com foco em:
+
+- Todos os tipos de cálculos usados.
 
 ---
 
@@ -136,13 +138,13 @@ Exemplo de build e run:
 
 ```bash
 docker build -t calculos-diversos .
-docker run -p 8000:8000 --env-file .env calculos-diversos
+docker run -p 8080:8080 --env-file .env calculos-diversos
 ```
 
 Comando de start definido no container:
 
 ```bash
-php artisan optimize && php artisan serve --host=0.0.0.0 --port=${PORT:-8000}
+php artisan optimize && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
 ```
 
 ---
