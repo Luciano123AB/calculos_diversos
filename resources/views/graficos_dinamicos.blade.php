@@ -23,7 +23,7 @@
 
             <div class="card-body bg-light p-5">
                 <div class="mx-auto" style="max-width: 600px;">
-                    <form action="{{ route("ExibirGraficosDinamicos") }}" method="POST" novalidate class="mx-auto" style="max-width: 600px;">
+                    <form action="{{ route("exibir.graficos.dinamicos") }}" method="POST" novalidate class="mx-auto" style="max-width: 600px;">
                         @csrf
 
                         <div class="input-group input-group-lg mb-3">

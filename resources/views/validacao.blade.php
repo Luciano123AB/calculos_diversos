@@ -23,7 +23,7 @@
 
             <div class="card-body bg-light p-5">
 
-    <form action="{{ route("CalcularValidacao") }}" method="POST" novalidate class="mx-auto" style="max-width: 600px;">
+    <form action="{{ route("calcular.validacao") }}" method="POST" novalidate class="mx-auto" style="max-width: 600px;">
         @csrf
                     
         <div class="input-group input-group-lg mb-3">

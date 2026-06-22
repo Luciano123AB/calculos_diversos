@@ -7,7 +7,7 @@ use Illuminate\View\View;
 
 class MainController
 {
-    public function index(): View {
+    public function home(): View {
         if (!is_dir(base_path("node_modules"))) {
             Boot::dependencias();
         }

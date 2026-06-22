@@ -1,9 +1,9 @@
 @extends("layouts.main_layout")
 
 @section("content")
-    @include("layouts.top")
+    @include("layouts.header")
 
-    <form action="{{ route("CalcularRelatoriosDesempenho") }}" method="POST" novalidate class="mx-auto" style="max-width: 700px;">
+    <form action="{{ route("calcular.relatorios.desempenho") }}" method="POST" novalidate class="mx-auto" style="max-width: 700px;">
         @csrf
         
         <div class="input-group input-group-lg mb-3">

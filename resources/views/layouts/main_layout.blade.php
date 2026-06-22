@@ -9,7 +9,6 @@
     
     @include("layouts.partials.links")
 
-    @include("layouts.partials.styles.estilos")
     @vite([
         "resources/css/app.css",
         "resources/js/app.js"
@@ -18,6 +17,6 @@
 <body class="bg-primary text-center fst-italic d-flex flex-column min-vh-100">
     @yield("content")
 
-    @include("layouts.partials.scripts.scripts")
+    <script src="{{ asset("assets/js/main_scripts.js") }}"></script>
 </body>
 </html>

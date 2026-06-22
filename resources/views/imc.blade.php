@@ -1,9 +1,9 @@
 @extends("layouts.main_layout")
 
 @section("content")
-    @include("layouts.top")
+    @include("layouts.header")
 
-    <form action="{{ route("CalcularImc") }}" method="POST" novalidate class="mx-auto" style="max-width: 600px;">
+    <form action="{{ route("calcular.imc") }}" method="POST" novalidate class="mx-auto" style="max-width: 600px;">
         @csrf
         
         <div class="input-group input-group-lg mb-3">

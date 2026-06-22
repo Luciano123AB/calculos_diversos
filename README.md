@@ -53,9 +53,13 @@ app/
   Http/    
     Controllers/          # Fluxos principais
   Services/               # Regras de negócio auxiliares
+docs/                     # Imagens usadas pelo site (Documentação do projeto)
 public/
-  assets/                 # Imagem usada pelo site (Proprietário)
+  assets/
+    images/               # Imagem usada pelo site (Proprietário)
+    js/                   # Interatividade do frontend
 resources/
+  css/                    # Estilos personalizados  
   views/                  # Telas Blade
 routes/
   web.php                 # Rotas da aplicação
@@ -63,7 +67,8 @@ routes/
 
 ## 📸 Demonstração
 
-![Home](docs/home.png)
+![Tela Home](docs/home.png)
+![Tela Calculo](docs/calculo.png)
 
 ---
 
