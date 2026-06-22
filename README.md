@@ -40,7 +40,7 @@ Aplicação web para cálculos com **Laravel**, com foco em:
 
 - **Backend:** PHP 8.5.3 + Laravel 12
 - **Frontend build:** Vite + CSS/JS
-- **Banco de dados:** MySQL 8
+- **Banco de dados:** Não
 - **Testes:** Não
 - **Containerização:** Docker
 
@@ -151,7 +151,7 @@ docker run -p 8080:8080 --env-file .env calculos-diversos
 Comando de start definido no container:
 
 ```bash
-php artisan migrate --force && php artisan optimize && php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
+php artisan optimize && php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
 ```
 
 ---
