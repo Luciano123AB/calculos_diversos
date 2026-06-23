@@ -5,7 +5,7 @@
 
 ## 📜 Sobre
 
-Aplicação web para cálculos com **Laravel**, com foco em:
+Aplicação web de cálculos com **Laravel**, com foco em:
 
 - Todos os tipos de cálculos usados.
 
@@ -51,18 +51,18 @@ Aplicação web para cálculos com **Laravel**, com foco em:
 ```text
 app/
   Http/    
-    Controllers/          # Fluxos principais
-  Services/               # Regras de negócio auxiliares
-docs/                     # Imagens usadas pelo site (Documentação do projeto)
+    Controllers/          # Controladores da aplicação. (MainController, Calculos)
+  Services/               # Regras de negócio auxiliares.
+docs/                     # Imagens usadas pelo site. (Documentação do projeto)
 public/
   assets/
-    images/               # Imagem usada pelo site (Proprietário)
+    images/               # Imagem usada pelo site. (Proprietário)
     js/                   # Interatividade do frontend
 resources/
-  css/                    # Estilos personalizados  
-  views/                  # Telas Blade
+  css/                    # Scripts carregados diretamente.
+  views/                  # Telas Blade.
 routes/
-  web.php                 # Rotas da aplicação
+  web.php                 # Rotas da aplicação.
 ```
 
 ## 📸 Demonstração
