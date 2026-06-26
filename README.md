@@ -1,7 +1,29 @@
 ![Laravel](https://img.shields.io/badge/Laravel-12-red)
 ![PHP](https://img.shields.io/badge/PHP-8.5-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
 
 # 🔢 Cálculos Diversos
+- Status: 🟢 Concluído
+
+---
+
+## 📑 Índice
+
+- Sobre
+- Funcionalidades
+- Stack
+- Estrutura
+- Demonstração
+- Pré-Requisitos
+- Instalação
+- Variáveis
+- Docker
+- Deploy
+- Roadmap
+- Licença
+- Autor
+
+---
 
 ## 📜 Sobre
 
@@ -50,25 +72,26 @@ Aplicação web de cálculos com **Laravel**, com foco em:
 
 ```text
 app/
-  Http/    
-    Controllers/          # Controladores da aplicação. (MainController, Calculos)
-  Services/               # Regras de negócio auxiliares.
+├── Http/    
+    └── Controllers/      # Controladores da aplicação. (MainController, Calculos)
+└── Services/             # Regras de negócio auxiliares.
 docs/                     # Imagens usadas pelo site. (Documentação do projeto)
 public/
-  assets/
-    images/               # Imagem usada pelo site. (Proprietário)
-    js/                   # Interatividade do frontend
+├── assets/
+    ├── images/           # Imagem usada pelo site. (Proprietário)
+    └── js/               # Interatividade do frontend
 resources/
-  css/                    # Scripts carregados diretamente.
-  views/                  # Telas Blade.
+├── css/                  # Scripts carregados diretamente.
+└── views/                # Telas Blade.
 routes/
-  web.php                 # Rotas da aplicação.
+└── web.php               # Rotas da aplicação.
 ```
 
 ## 📸 Demonstração
 
-![Tela Home](docs/home.png)
-![Tela Calculo](docs/calculo.png)
+| Tela Home | Tela Calculo |
+|-------------|-----------|
+| ![](docs/home.png) | ![](docs/calculo.png) |
 
 ---
 
@@ -113,9 +136,7 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-6. Configure as variáveis de banco no `.env`.
-
-7. Suba o ambiente de desenvolvimento (server + queue + vite):
+6. Suba o ambiente de desenvolvimento (server + queue + vite):
  
 ```bash
 composer run dev
@@ -165,9 +186,17 @@ Checklist recomendado:
  
 ---
 
+```md
 ## 🗺️ Roadmap Técnico Sugerido (Melhorias)
 
-- Nenhum.
+- [ ] Nenhum.
+```
+
+---
+
+## 📄 Licença
+
+Este projeto está licenciado sob a licença MIT.
 
 ---
 
