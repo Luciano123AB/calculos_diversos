@@ -63,7 +63,7 @@ Aplicação web de cálculos com **Laravel**, com foco em:
 - **Backend:** PHP 8.5.3 + Laravel 12
 - **Frontend build:** Vite + CSS/JS
 - **Banco de dados:** Não
-- **Testes:** Não
+- **Testes:** Sim
 - **Containerização:** Docker
 
 ---
